@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lugares Celestiales - Archivo Teológico</title>
+    
+    <!-- Tailwind CSS for high-fidelity responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display for headers, Inter for premium reading experience -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for classic icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        vintage: {
+                            bg: '#FAF9F6', // Antique paper cream
+                            black: '#1A1A1A',
+                            gray: '#6B6A67',
+                            border: '#E8E6E0',
+                            creamDark: '#F2F0EB',
+                            accent: '#8C7547', // Elegant brass/gold
+                            accentLight: '#FAF6EE'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FAF9F6;
+            color: #1A1A1A;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Subtle film grain/noise overlay for high-end editorial feel */
+        .noise-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.04;
+            z-index: 10;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.85) 100%);
+        }
+
+        /* Classical pen input style */
+        .input-vintage {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #1A1A1A;
+            border-radius: 0;
+            padding: 0.5rem 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.125rem;
+        }
+        .input-vintage:focus {
+            outline: none;
+            border-bottom: 2px solid #8C7547;
+        }
+
+        /* Smooth page fade transitions */
+        .fade-in {
+            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col relative select-none">
+    <div class="noise-overlay"></div>
+
+    <nav class="bg-vintage-bg/95 border-b border-vintage-border sticky top-0 z-40 w-full backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <!-- Vintage Typography Logo -->
+            <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="switchTab('feed')">
+                LUGARES<br><span class="text-vintage-accent">CELESTIALES.</span>
+            </div>
+            
+            <!-- Navigation links and Instagram integrations -->
+            <div class="flex flex-wrap justify-center items-center gap-6 font-sans text-xs uppercase tracking-widest font-semibold">
+                <button onclick="switchTab('feed')" id="nav-feed" class="text-vintage-black border-b border-vintage-black pb-1 transition duration-200">
+                    Inicio
+                </button>
+                <a href="https://instagram.com/lugarescelestiales.official" target="_blank" class="text-vintage-gray hover:text-vintage-black flex items-center gap-1.5 transition duration-200">
+                    <i class="fab fa-instagram text-sm"></i>
+                    @lugarescelestiales.official
+                </a>
+                <button onclick="abrirSimuladorInstagram()" class="bg-vintage-accent/10 text-vintage-accent border border-vintage-accent/20 hover:bg-vintage-accent hover:text-white px-3 py-1.5 rounded-sm transition duration-200 flex items-center gap-1">
+                    <i class="fas fa-link text-[10px]"></i>
+                    Acceder desde Instagram
+                </button>
+                <div id="admin-indicator" class="hidden items-center gap-1.5 bg-vintage-black text-white text-[10px] px-2.5 py-1 rounded-sm">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full inline-block animate-pulse"></span>
+                    EDITOR
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="hero-section" class="relative h-[48vh] w-full hero-bg flex flex-col transition-all duration-500">
+        <div class="absolute inset-0 hero-overlay"></div>
+        <div class="relative z-20 flex-grow flex items-center justify-center px-4 text-center pb-8">
+            <div class="max-w-3xl">
+                <p class="text-white text-xs uppercase tracking-[0.3em] mb-4 font-sans opacity-80 font-semibold">Lugares Celestiales</p>
+                <h1 class="font-serif text-white text-3xl md:text-5xl lg:text-6xl leading-tight font-medium drop-shadow-md">
+                    La teología es la base de una iglesia sana.
+                </h1>
+                <div class="w-16 h-[1px] bg-vintage-accent mx-auto mt-6"></div>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">
+        
+        <!-- ================= VIEW: ARTICLES FEED ================= -->
+        <div id="view-feed" class="block space-y-8 fade-in">
+            <div class="text-center">
+                <span class="font-sans text-[10px] uppercase tracking-[0.25em] text-vintage-gray block mb-2 font-semibold">Escritos de Edificación</span>
+                <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Enseñanza y materiales</h2>
+                <div class="w-8 h-[1px] bg-vintage-gray mx-auto mt-3 mb-6"></div>
+                
+                <!-- Minimalist theological search bar -->
+                <div class="max-w-md mx-auto relative mb-4">
+                    <input type="text" id="search-input" oninput="filterArticles()" placeholder="Buscar por título, cita o autor..." class="w-full bg-vintage-creamDark/60 border border-vintage-border rounded-full py-2.5 pl-10 pr-4 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent focus:border-vintage-accent transition-all">
+                    <div class="absolute left-3.5 top-3 text-vintage-gray">
+                        <i class="fas fa-search text-xs"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Real-time synchronized container for items -->
+            <div id="articles-container" class="flex flex-col">
+                <div class="py-12 text-center">
+                    <span class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-vintage-black"></span>
+                    <p class="font-serif italic text-vintage-gray text-sm mt-3">Sincronizando archivo teológico...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= VIEW: ARTICLE DETAILS ================= -->
+        <div id="view-article-detail" class="hidden fade-in">
+            <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider mb-8 transition">
+                &larr; Volver a Enseñanza y Materiales
+            </button>
+            
+            <article class="bg-vintage-bg border border-vintage-border p-6 md:p-12 shadow-sm rounded-sm relative">
+                <!-- Administrative Actions Button Panel (Exclusively shown to authenticated redactors) -->
+                <div id="admin-actions" class="absolute top-4 right-4 hidden gap-2">
+                    <button id="btn-edit-current" class="bg-amber-600 hover:bg-amber-700 text-white px-3 py-1 text-xs uppercase tracking-wider rounded-sm transition">Editar</button>
+                    <button id="btn-delete-current" class="bg-red-700 hover:bg-red-800 text-white px-3 py-1 text-xs uppercase tracking-wider rounded-sm transition">Eliminar</button>
+                </div>
+
+                <header class="text-center border-b border-vintage-border pb-8 mb-8">
+                    <span id="detail-reference" class="font-sans text-xs uppercase tracking-[0.2em] text-vintage-accent block mb-3"></span>
+                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium leading-tight mb-4"></h1>
+                    <div class="font-serif italic text-vintage-gray text-base md:text-lg">
+                        Escrito por <span id="detail-author" class="font-medium text-vintage-black"></span>
+                    </div>
+                </header>
+                
+                <!-- Display Image Container with optional Holy Trinity Badge Layer -->
+                <div class="flex flex-col items-center mb-8">
+                    <div class="relative w-full max-w-2xl h-64 md:h-96 overflow-hidden bg-neutral-100 border border-vintage-border rounded-sm shadow-inner">
+                        <img id="detail-image" src="" alt="Artículo" class="w-full h-full object-cover grayscale opacity-95 hover:grayscale-0 transition duration-700">
+                        <!-- Protestant Trinity Knot Badge (visible only on specific items) -->
+                        <div id="trinity-badge" class="hidden absolute top-4 left-4 bg-vintage-bg/90 border border-vintage-accent/40 backdrop-blur-md px-3 py-2 rounded-sm shadow-md items-center gap-2 text-vintage-accent">
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" opacity="0.15" stroke-dasharray="2 2"/>
+                                <path d="M12 4.5c1.5 3 3.5 6 6 8.5-3 1.5-6 3.5-8.5 6-1.5-3-3.5-6-6-8.5 3-1.5 6-3.5 8.5-6z"/>
+                                <path d="M12 4.5c-1.5 3-3.5 6-6 8.5 3 1.5 6 3.5 8.5 6 1.5-3 3.5-6 6-8.5-3-1.5-6-3.5-8.5-6z"/>
+                            </svg>
+                            <span class="font-sans text-[9px] uppercase tracking-widest font-semibold">Trinidad Divina</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:mt-1">
+                    <!-- Text injected here -->
+                </div>
+                
+                <div class="border-t border-vintage-border mt-12 pt-8 text-center">
+                    <div class="font-serif text-xs uppercase tracking-widest text-vintage-gray">Soli Deo Gloria</div>
+                </div>
+            </article>
+        </div>
+
+        <!-- ================= VIEW: EDITOR DESK (PUBLISH / EDIT) ================= -->
+        <div id="view-publish" class="hidden fade-in">
+            <div class="mb-10 text-center">
+                <span class="font-sans text-[10px] uppercase tracking-[0.25em] text-vintage-accent block mb-2">Mesa del Editor</span>
+                <h2 id="publish-view-title" class="font-serif text-3xl font-medium text-vintage-black mb-2">Nueva Publicación</h2>
+                <p class="font-serif italic text-sm text-vintage-gray">Sube y edita material teológico de manera directa</p>
+                <div class="w-8 h-[1px] bg-vintage-gray mx-auto mt-4"></div>
+            </div>
+                
+            <form id="publish-form" class="space-y-8 bg-vintage-creamDark/30 p-6 md:p-8 border border-vintage-border rounded-sm">
+                <input type="hidden" id="edit-article-id" value="">
+                
+                <div>
+                    <label class="block font-sans text-xs uppercase tracking-widest text-vintage-gray mb-1">Título de la enseñanza</label>
+                    <input type="text" id="title" required placeholder="Ej. El Triunfo de la Gracia" class="input-vintage w-full text-lg">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <label class="block font-sans text-xs uppercase tracking-widest text-vintage-gray mb-1">Firmado por / Autor exclusivo</label>
+                        <input type="text" id="author" required placeholder="Ej. THIAGO FRANZA" class="input-vintage w-full">
+                    </div>
+                    <div>
+                        <label class="block font-sans text-xs uppercase tracking-widest text-vintage-gray mb-1">Referencia Bíblica (Opcional)</label>
+                        <input type="text" id="reference" placeholder="Ej. Romanos 5:1-2" class="input-vintage w-full">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-sans text-xs uppercase tracking-widest text-vintage-gray mb-1">URL de Imagen Vintage (Opcional)</label>
+                    <input type="url" id="image-url" placeholder="https://images.unsplash.com/..." class="input-vintage w-full text-sm">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-end mb-2">
+                        <label for="content" class="block font-sans text-xs uppercase tracking-widest text-vintage-gray font-semibold">Cuerpo Teológico del Escrito</label>
+                        <!-- Integrated autonomous draft writer (no brand names) -->
+                        <button type="button" onclick="utilizarAsistenteRedaccion()" id="asistente-btn" class="font-serif italic text-xs text-vintage-accent hover:text-vintage-black transition flex items-center gap-1 cursor-pointer">
+                            <i class="fas fa-feather-alt"></i>
+                            Refinar borrador teológico
+                        </button>
+                    </div>
+                    <textarea id="content" required rows="10" placeholder="Redacta la enseñanza aquí..." class="w-full bg-transparent border border-vintage-black/30 p-4 font-serif text-base focus:outline-none focus:ring-1 focus:ring-vintage-accent focus:border-vintage-accent resize-y rounded-sm"></textarea>
+                </div>
+
+                <div class="flex flex-wrap justify-between items-center gap-4 pt-4 border-t border-vintage-border">
+                    <button type="button" onclick="cancelarEdicion()" class="font-sans text-xs uppercase tracking-widest text-vintage-gray hover:text-vintage-black transition">
+                        Cancelar
+                    </button>
+                    <button type="submit" id="btn-save" class="bg-vintage-black text-white font-sans text-xs uppercase tracking-widest font-semibold px-8 py-3.5 hover:bg-neutral-800 transition rounded-sm">
+                        Publicar Material
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    
+    <!-- ================= INSTAGRAM SIMULATOR & BIO LINK PORTAL ================= -->
+    <div id="instagram-simulator-modal" class="fixed inset-0 bg-neutral-950/85 backdrop-blur-md hidden items-center justify-center p-4 z-50 overflow-y-auto">
+        <div class="bg-vintage-bg border border-vintage-border max-w-4xl w-full rounded-lg shadow-2xl flex flex-col md:flex-row overflow-hidden relative fade-in">
+            
+            <button onclick="cerrarSimuladorInstagram()" class="absolute top-4 right-4 text-vintage-black text-2xl hover:opacity-60 font-sans z-50">&times;</button>
+            
+            <!-- Left Panel: The simulated Instagram App Interface on iPhone -->
+            <div class="w-full md:w-1/2 bg-neutral-900 p-6 flex flex-col items-center border-b md:border-b-0 md:border-r border-vintage-border/10 justify-center">
+                <span class="text-xs uppercase tracking-widest text-neutral-400 mb-4 block"><i class="fab fa-instagram mr-1 text-pink-500"></i> Simulación en Directo</span>
+                
+                <!-- Simulated iPhone Shell -->
+                <div class="w-[280px] h-[540px] bg-black rounded-[36px] p-2.5 border-4 border-neutral-700 shadow-2xl flex flex-col relative overflow-hidden">
+                    <!-- Notch -->
+                    <div class="absolute top-2.5 left-1/2 transform -translate-x-1/2 w-28 h-4.5 bg-black rounded-full z-40 flex items-center justify-center">
+                        <div class="w-3.5 h-1.5 bg-neutral-800 rounded-full mr-1.5"></div>
+                        <div class="w-1.5 h-1.5 bg-neutral-800 rounded-full"></div>
+                    </div>
+                    
+                    <!-- iPhone Screen Content (Instagram App View) -->
+                    <div class="flex-grow bg-neutral-950 text-white rounded-[26px] overflow-hidden flex flex-col pt-4 font-sans text-xs relative">
+                        <!-- IG App Top Bar -->
+                        <div class="flex justify-between items-center px-4 py-2 border-b border-neutral-900 mt-2">
+                            <span class="font-bold text-sm tracking-wide">Instagram</span>
+                            <div class="flex gap-3 text-sm">
+                                <i class="far fa-heart"></i>
+                                <i class="far fa-paper-plane"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- IG User Info -->
+                        <div class="px-4 pt-3 flex items-center gap-4">
+                            <!-- Avatar with colorful outline -->
+                            <div class="w-16 h-16 rounded-full p-0.5 bg-gradient-to-tr from-yellow-500 via-pink-500 to-purple-600 flex-shrink-0">
+                                <div class="w-full h-full bg-neutral-950 rounded-full flex items-center justify-center text-xs font-serif text-vintage-accent font-bold">
+                                    L C.
+                                </div>
+                            </div>
+                            <div class="flex-grow flex justify-around text-center">
+                                <div><span class="font-bold block text-sm">4</span><span class="text-[9px] text-neutral-400">Posts</span></div>
+                                <div><span class="font-bold block text-sm">1.8k</span><span class="text-[9px] text-neutral-400">Seguidores</span></div>
+                                <div><span class="font-bold block text-sm">12</span><span class="text-[9px] text-neutral-400">Seguidos</span></div>
+                            </div>
+                        </div>
+                        
+                        <!-- IG Bio details and Link -->
+                        <div class="px-4 pt-2.5 space-y-0.5">
+                            <span class="font-bold block text-xs">Lugares Celestiales</span>
+                            <span class="text-[10px] text-neutral-300 block">"La teología es la base de una iglesia sana."</span>
+                            <span class="text-[10px] text-neutral-400 block font-serif italic">Soli Deo Gloria</span>
+                            
+                            <!-- The Instagram Bio Link! -->
+                            <button onclick="ejecutarNavegacionSimulada()" class="text-sky-400 font-medium text-[10px] hover:underline flex items-center gap-1 py-1 text-left">
+                                <i class="fas fa-link text-[8px]"></i>
+                                lugarescelestiales.bio
+                            </button>
+                        </div>
+                        
+                        <!-- Instagram Action Buttons -->
+                        <div class="grid grid-cols-2 gap-1.5 px-4 pt-3">
+                            <button class="bg-neutral-800 text-[10px] font-semibold py-1 rounded-md text-center">Seguir</button>
+                            <button class="bg-neutral-800 text-[10px] font-semibold py-1 rounded-md text-center">Mensaje</button>
+                        </div>
+
+                        <!-- Instagram Feed Grids Preview -->
+                        <div class="grid grid-cols-3 gap-0.5 pt-4 flex-grow content-start overflow-hidden opacity-60">
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-hands-praying text-neutral-700 text-lg"></i></div>
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-church text-neutral-700 text-lg"></i></div>
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-star text-neutral-700 text-lg"></i></div>
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-book-open text-neutral-700 text-lg"></i></div>
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-cross text-neutral-700 text-lg"></i></div>
+                            <div class="aspect-square bg-neutral-900 flex items-center justify-center"><i class="fas fa-scroll text-neutral-700 text-lg"></i></div>
+                        </div>
+
+                        <!-- Swipe Up / Simulated click indicator -->
+                        <div class="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-center animate-bounce">
+                            <span class="text-[8px] bg-vintage-accent text-white px-2.5 py-1 rounded-full uppercase tracking-wider font-semibold">Toca el enlace azul</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Step-by-step deploy & direct link settings -->
+            <div class="w-full md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
+                <span class="font-sans text-[10px] uppercase tracking-widest text-vintage-accent font-semibold mb-1">Acceso Directo y Despliegue</span>
+                <h3 class="font-serif text-2xl text-vintage-black mb-4">¿Cómo funciona este Enlace?</h3>
+                <div class="w-12 h-[1px] bg-vintage-accent mb-6"></div>
+
+                <p class="font-serif italic text-vintage-gray text-sm leading-relaxed mb-6">
+                    Esta aplicación está optimizada con un diseño web móvil responsivo y ligero, ideal para cargarse de forma instantánea dentro del navegador integrado de <strong>Instagram</strong>. No requieres que tus lectores busquen en Google para encontrar tu material.
+                </p>
+
+                <div class="space-y-4 mb-6">
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-vintage-accent/10 flex items-center justify-center flex-shrink-0 text-vintage-accent text-xs font-bold">1</div>
+                        <div>
+                            <h4 class="font-sans text-xs uppercase tracking-widest font-semibold text-vintage-black">Copiar Enlace Directo</h4>
+                            <p class="text-xs text-vintage-gray leading-relaxed">Puedes copiar el enlace actual de forma automática para compartirlo.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-vintage-accent/10 flex items-center justify-center flex-shrink-0 text-vintage-accent text-xs font-bold">2</div>
+                        <div>
+                            <h4 class="font-sans text-xs uppercase tracking-widest font-semibold text-vintage-black">Alojar gratis en 1 minuto</h4>
+                            <p class="text-xs text-vintage-gray leading-relaxed">Carga este único archivo HTML en plataformas gratuitas como GitHub Pages, Vercel o Netlify para tener tu dominio personal en la biografía.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <button onclick="copiarEnlaceBio()" class="w-full bg-vintage-black text-white text-xs uppercase tracking-widest font-bold py-3.5 hover:bg-neutral-800 transition rounded-sm">
+                        <i class="fas fa-clipboard mr-1.5"></i> Copiar Enlace para Bio
+                    </button>
+                    <button onclick="cerrarSimuladorInstagram()" class="w-full border border-vintage-black/20 text-vintage-black text-xs uppercase tracking-widest py-3 hover:bg-vintage-creamDark/40 transition rounded-sm">
+                        Cerrar e Ir a la Web
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= EDITORIAL LOGIN MODAL (Access for Editorial Control) ================= -->
+    <div id="login-modal" class="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-vintage-bg border border-vintage-black p-8 max-w-sm w-full relative fade-in">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-vintage-black text-lg hover:opacity-60 font-sans">&times;</button>
+            
+            <div class="text-center mb-6">
+                <span class="font-sans text-[10px] uppercase tracking-widest text-vintage-accent">Control Editorial</span>
+                <h3 class="font-serif text-2xl text-vintage-black mt-1">Acceso Administrativo</h3>
+                <div class="w-12 h-[1.5px] bg-vintage-accent mx-auto mt-2"></div>
+            </div>
+
+            <form id="login-form" onsubmit="procesarLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block font-sans text-[10px] uppercase tracking-widest text-vintage-gray mb-1">Correo del Administrador</label>
+                    <input type="email" id="login-email" required placeholder="correo@ejemplo.com" class="input-vintage w-full text-base">
+                </div>
+                <div>
+                    <label class="block font-sans text-[10px] uppercase tracking-widest text-vintage-gray mb-1">Contraseña</label>
+                    <input type="password" id="login-password" required placeholder="••••••••" class="input-vintage w-full text-base">
+                </div>
+                
+                <button type="submit" class="w-full bg-vintage-black text-white text-xs uppercase tracking-widest font-bold py-3.5 mt-4 hover:bg-neutral-800 transition rounded-sm">
+                    Ingresar a la Mesa del Editor
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Vintage Footer -->
+    <footer class="bg-vintage-bg border-t border-vintage-border mt-auto">
+        <div class="max-w-3xl mx-auto px-4 py-8 text-center flex flex-col items-center gap-4">
+            <div class="font-serif text-lg leading-none uppercase tracking-widest text-vintage-black">
+                L C.
+            </div>
+            
+            <!-- Discretely accessible admin gate -->
+            <div class="flex items-center gap-4">
+                <button onclick="openLoginModal()" id="btn-admin-gate" class="font-sans text-[10px] uppercase tracking-widest text-vintage-gray hover:text-vintage-accent transition">
+                    Acceso Administrativo
+                </button>
+                <button onclick="logoutAdmin()" id="btn-admin-logout" class="hidden font-sans text-[10px] uppercase tracking-widest text-red-700 hover:text-red-900 transition font-bold">
+                    Cerrar Sesión Admin
+                </button>
+            </div>
+
+            <p class="font-sans text-[10px] text-vintage-gray uppercase tracking-widest">
+                &copy; <span id="current-year"></span> Lugares Celestiales. Todos los derechos reservados.
+            </p>
+            <p class="font-serif text-sm italic text-vintage-gray max-w-md leading-relaxed">
+                "La exposición de tus palabras alumbra; hace entender a los sencillos." — Salmo 119:130
+            </p>
+        </div>
+    </footer>
+
+    <!-- Pop-up minimalist Toast notifications -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-vintage-black text-white px-8 py-3.5 font-sans text-xs uppercase tracking-widest shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-50 rounded-sm">
+        Acción realizada con éxito
+    </div>
+
+    <!-- Scripts & Integration of Database and Application Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, getDocs, setDoc, addDoc, updateDoc, deleteDoc, collection, query, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Environment Parameters
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'lugares-celestiales-v2';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "",
+            authDomain: "dummy.firebaseapp.com",
+            projectId: "dummy-project",
+            storageBucket: "dummy.appspot.com",
+            messagingSenderId: "12345",
+            appId: "1:12345:web:12345"
+        };
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : undefined;
+
+        // Firebase Initializations
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Global State Variables
+        let articlesList = [];
+        let filteredArticlesList = [];
+        let currentAdminUser = null;
+        let selectedArticleIdForDetail = null;
+
+        // Core Theological Seed Materials - Built exactly to prompt definitions
+        const seedArticles = [
+            {
+                title: "Cuarto de Oración",
+                author: "THIAGO FRANZA",
+                reference: "Hechos 2:42",
+                content: "El cuarto de oración no es solo un lugar físico sino un lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración (Hechos 2:42). La iglesia primitiva vivía con una teología sana, pero también con la práctica de las oraciones y de partir el pan juntos.",
+                imageUrl: "https://images.unsplash.com/photo-1543165796-5426273eaab3?w=800&h=600&fit=crop"
+            },
+            {
+                title: "Cristología",
+                author: "Lugares Celestiales",
+                reference: "Colosenses 1:15-18",
+                content: "La cristología representa la espina dorsal del entendimiento redentor de las Escrituras. Contemplar al Hijo no es meramente un ejercicio académico, sino un llamado continuo a adorar al Verbo encarnado, quien sostiene todas las cosas con la palabra de Su poder. Alrededor de Su persona y obra se edifica la liturgia pura y el correcto andar de la casa de Dios.\n\nSin una cristología bíblica rigurosa, el creyente y la comunidad local quedan desarmados frente al relativismo moderno. Conocer Su preexistencia, Su encarnación virginal, Su vida perfecta, Su muerte sustitutiva y Su resurrección corporal es la garantía absoluta de un discipulado firme e inconmovible.",
+                imageUrl: "https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&h=600&fit=crop"
+            },
+            {
+                title: "Israel",
+                author: "Lugares Celestiales",
+                reference: "Romanos 11:1-2",
+                content: "El misterio de Israel en el plan salvífico de Dios es un testimonio deslumbrante de Su irrevocable fidelidad. Las promesas hechas a los patriarcas no han sido olvidadas, sino que actúan como el ancla de la consistencia del pacto divino. Entender este propósito histórico nos aleja de la altivez teológica y nos introduce a una contemplación humilde del diseño providencial.\n\nComo ramas injertadas de un olivo silvestre, los gentiles compartimos la rica savia de las promesas del Pacto. Este reconocimiento nutre un amor bíblico por el pueblo del pacto original, permitiéndonos comprender que el final de la historia no es un accidente, sino el exacto cumplimiento de lo hablado por boca de los santos profetas desde la antigüedad.",
+                imageUrl: "https://images.unsplash.com/photo-1544085311-11a028465b53?w=800&h=600&fit=crop" // Israel Flag
+            },
+            {
+                title: "Recursos para tu Iglesia",
+                author: "THIAGO FRANZA",
+                reference: "Efesios 4:13-14",
+                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, mas también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras.",
+                imageUrl: "https://images.unsplash.com/photo-1548625361-155deee223cd?w=800&h=600&fit=crop" // Protestant stained glass cathedral representation of Trinity
+            }
+        ];
+
+        // Secure authentication initial loop
+        async function initAuth() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Fallo de autenticación inicial, reintentando de forma anónima...", err);
+                try {
+                    await signInAnonymously(auth);
+                } catch (e) {
+                    console.error("Autenticación imposible.", e);
+                }
+            }
+        }
+
+        // Monitoring Session States
+        onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) {
+                currentAdminUser = user;
+                document.getElementById('admin-indicator').classList.remove('hidden');
+                document.getElementById('admin-indicator').classList.add('flex');
+                document.getElementById('btn-admin-gate').textContent = "Mesa de Redacción";
+                document.getElementById('btn-admin-logout').classList.remove('hidden');
+                actualizarVistasAdmin(true);
+            } else {
+                currentAdminUser = null;
+                document.getElementById('admin-indicator').classList.add('hidden');
+                document.getElementById('admin-indicator').classList.remove('flex');
+                document.getElementById('btn-admin-gate').textContent = "Acceso Administrativo";
+                document.getElementById('btn-admin-logout').classList.add('hidden');
+                actualizarVistasAdmin(false);
+            }
+        });
+
+        function actualizarVistasAdmin(isAdmin) {
+            const adminActions = document.getElementById('admin-actions');
+            if (adminActions) {
+                if (isAdmin) {
+                    adminActions.classList.remove('hidden');
+                    adminActions.classList.add('flex');
+                } else {
+                    adminActions.classList.remove('flex');
+                    adminActions.classList.add('hidden');
+                }
+            }
+        }
+
+        // Real-time synchronization
+        function syncTeologia() {
+            const articlesCol = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+            
+            onSnapshot(articlesCol, async (snapshot) => {
+                if (snapshot.empty) {
+                    // Populate initial database seeding silently if empty
+                    console.log("Inicializando base de datos con enseñanzas predeterminadas...");
+                    for (const art of seedArticles) {
+                        await addDoc(articlesCol, {
+                            ...art,
+                            createdAt: Date.now()
+                        });
+                    }
+                    return;
+                }
+
+                articlesList = [];
+                snapshot.forEach(docSnap => {
+                    articlesList.push({
+                        id: docSnap.id,
+                        ...docSnap.data()
+                    });
+                });
+
+                // Rule 2: Order local arrays instead of calling index-dependent queries
+                articlesList.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+                
+                filteredArticlesList = [...articlesList];
+                renderArticlesList();
+                
+                if (selectedArticleIdForDetail) {
+                    const matched = articlesList.find(a => a.id === selectedArticleIdForDetail);
+                    if (matched) {
+                        displayArticleInDetail(matched);
+                    } else {
+                        switchTab('feed');
+                    }
+                }
+            }, (error) => {
+                console.error("Error al sincronizar datos:", error);
+                // Robust client-side offline fallback
+                articlesList = seedArticles.map((s, idx) => ({ id: `seed-${idx}`, ...s }));
+                filteredArticlesList = [...articlesList];
+                renderArticlesList();
+            });
+        }
+
+        // Render Feed layout list
+        function renderArticlesList() {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = '';
+
+            if (filteredArticlesList.length === 0) {
+                container.innerHTML = `
+                    <div class="py-12 text-center">
+                        <p class="font-serif italic text-vintage-gray text-base">No se encontraron enseñanzas con este criterio de búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredArticlesList.forEach((article, index) => {
+                const item = document.createElement('div');
+                const borderClass = index === 0 ? 'border-y border-vintage-border' : 'border-b border-vintage-border';
+                item.className = `flex items-center justify-between py-6 group cursor-pointer hover:bg-vintage-creamDark/45 transition duration-300 px-3 -mx-3 ${borderClass}`;
+                
+                const fallbackImg = "https://images.unsplash.com/photo-1543165796-5426273eaab3?w=300&h=300&fit=crop";
+                const src = article.imageUrl || fallbackImg;
+
+                item.onclick = () => selectArticle(article.id);
+
+                item.innerHTML = `
+                    <div class="flex items-center gap-6">
+                        <div class="relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 bg-neutral-200 overflow-hidden border border-vintage-border rounded-sm">
+                            <img src="${src}" alt="${article.title}" class="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition duration-500" onerror="this.src='${fallbackImg}'">
+                            <!-- Stained glass Trinity Overlay Icon for specific cards -->
+                            ${article.title === "Recursos para tu Iglesia" ? `
+                            <div class="absolute inset-0 bg-vintage-accent/20 flex items-center justify-center opacity-60 group-hover:opacity-0 transition duration-300">
+                                <i class="fas fa-clover text-white text-xs"></i>
+                            </div>` : ''}
+                        </div>
+                        <div>
+                            <span class="font-sans text-[9px] uppercase tracking-widest text-vintage-accent font-semibold block">Lugares Celestiales — ${article.author}</span>
+                            <h3 class="font-serif text-lg md:text-xl text-vintage-black font-semibold group-hover:text-black transition mt-1">
+                                ${article.title}
+                            </h3>
+                            ${article.reference ? `<p class="font-sans text-[10px] uppercase tracking-[0.15em] text-vintage-gray mt-1">${article.reference}</p>` : ''}
+                        </div>
+                    </div>
+                    <div class="text-xl font-light text-vintage-black opacity-35 group-hover:opacity-100 group-hover:translate-x-1.5 transition duration-300 px-2">
+                        &rarr;
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Display selected article on screen detail reader
+        window.selectArticle = function(id) {
+            const article = articlesList.find(a => a.id === id);
+            if (!article) return;
+            selectedArticleIdForDetail = id;
+            displayArticleInDetail(article);
+            switchTab('detail');
+        }
+
+        function displayArticleInDetail(article) {
+            document.getElementById('detail-title').textContent = article.title;
+            document.getElementById('detail-author').textContent = article.author;
+            document.getElementById('detail-reference').textContent = article.reference || "Enseñanza";
+            document.getElementById('detail-content').textContent = article.content;
+            
+            const detailImg = document.getElementById('detail-image');
+            const fallbackImg = "https://images.unsplash.com/photo-1543165796-5426273eaab3?w=800&h=600&fit=crop";
+            detailImg.src = article.imageUrl || fallbackImg;
+            detailImg.onerror = () => { detailImg.src = fallbackImg; };
+
+            // Control display of the custom Trinity Emblem Badge exclusively on "Recursos para tu Iglesia"
+            const trinityBadge = document.getElementById('trinity-badge');
+            if (article.title === "Recursos para tu Iglesia") {
+                trinityBadge.classList.remove('hidden');
+                trinityBadge.classList.add('flex');
+            } else {
+                trinityBadge.classList.add('hidden');
+                trinityBadge.classList.remove('flex');
+            }
+
+            // Expose admin buttons to current authenticated profiles
+            document.getElementById('btn-delete-current').onclick = () => deleteArticle(article.id);
+            document.getElementById('btn-edit-current').onclick = () => editArticle(article);
+        }
+
+        // Real-time filtering algorithm
+        window.filterArticles = function() {
+            const queryText = document.getElementById('search-input').value.toLowerCase().trim();
+            if (!queryText) {
+                filteredArticlesList = [...articlesList];
+            } else {
+                filteredArticlesList = articlesList.filter(article => {
+                    const titleMatch = article.title ? article.title.toLowerCase().includes(queryText) : false;
+                    const authorMatch = article.author ? article.author.toLowerCase().includes(queryText) : false;
+                    const refMatch = article.reference ? article.reference.toLowerCase().includes(queryText) : false;
+                    const contentMatch = article.content ? article.content.toLowerCase().includes(queryText) : false;
+                    return titleMatch || authorMatch || refMatch || contentMatch;
+                });
+            }
+            renderArticlesList();
+        }
+
+        // Post or edit submissions on Firestore
+        const publishForm = document.getElementById('publish-form');
+        publishForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            if (!auth.currentUser || auth.currentUser.isAnonymous) {
+                showToast("Acción restringida a editores autorizados");
+                return;
+            }
+
+            const editId = document.getElementById('edit-article-id').value;
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const reference = document.getElementById('reference').value;
+            const imageUrl = document.getElementById('image-url').value;
+            const content = document.getElementById('content').value;
+
+            const articlesCol = collection(db, 'artifacts', appId, 'public', 'data', 'articles');
+
+            try {
+                if (editId) {
+                    const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'articles', editId);
+                    await updateDoc(docRef, {
+                        title,
+                        author,
+                        reference,
+                        imageUrl,
+                        content
+                    });
+                    showToast("Enseñanza actualizada correctamente");
+                } else {
+                    await addDoc(articlesCol, {
+                        title,
+                        author,
+                        reference,
+                        imageUrl,
+                        content,
+                        createdAt: Date.now()
+                    });
+                    showToast("Enseñanza publicada con éxito");
+                }
+                
+                publishForm.reset();
+                document.getElementById('edit-article-id').value = '';
+                switchTab('feed');
+            } catch (err) {
+                console.error("Fallo al escribir en base de datos:", err);
+                showToast("Ocurrió un error al procesar el material.");
+            }
+        });
+
+        // Delete article
+        async function deleteArticle(id) {
+            if (!auth.currentUser || auth.currentUser.isAnonymous) {
+                showToast("Acción exclusiva para administradores");
+                return;
+            }
+
+            // Using custom confirm flow to avoid standard alert interruption
+            const confirmation = window.confirm("¿Estás seguro de que deseas eliminar permanentemente este material teológico?");
+            if (!confirmation) return;
+
+            try {
+                const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'articles', id);
+                await deleteDoc(docRef);
+                showToast("Material eliminado del archivo");
+                selectedArticleIdForDetail = null;
+                switchTab('feed');
+            } catch (err) {
+                console.error("Error al eliminar documento:", err);
+                showToast("No se pudo eliminar el material.");
+            }
+        }
+
+        // Fill form fields with data to edit
+        function editArticle(article) {
+            document.getElementById('edit-article-id').value = article.id;
+            document.getElementById('title').value = article.title;
+            document.getElementById('author').value = article.author;
+            document.getElementById('reference').value = article.reference || '';
+            document.getElementById('image-url').value = article.imageUrl || '';
+            document.getElementById('content').value = article.content;
+
+            document.getElementById('publish-view-title').textContent = "Editar Material";
+            document.getElementById('btn-save').textContent = "Actualizar Material";
+            
+            switchTab('publish');
+        }
+
+        window.cancelarEdicion = function() {
+            publishForm.reset();
+            document.getElementById('edit-article-id').value = '';
+            document.getElementById('publish-view-title').textContent = "Nueva Publicación";
+            document.getElementById('btn-save').textContent = "Publicar Material";
+            switchTab('feed');
+        }
+
+        // Admin Log In Verification
+        window.procesarLogin = async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                closeLoginModal();
+                showToast("Acceso concedido a la Mesa del Editor");
+                switchTab('publish');
+            } catch (error) {
+                console.error("Fallo de inicio de sesión:", error);
+                showToast("Credenciales de editor no autorizadas.");
+            }
+        }
+
+        window.logoutAdmin = async function() {
+            try {
+                await signOut(auth);
+                await signInAnonymously(auth);
+                showToast("Sesión de editor finalizada");
+                switchTab('feed');
+            } catch (err) {
+                console.error("Error al salir:", err);
+            }
+        }
+
+        // Custom internal drafting intelligence tool (Completely white-labeled)
+        window.utilizarAsistenteRedaccion = async function() {
+            const titleField = document.getElementById('title').value.trim();
+            const refField = document.getElementById('reference').value.trim();
+            const contentField = document.getElementById('content');
+            const asistenteBtn = document.getElementById('asistente-btn');
+
+            if (!titleField) {
+                showToast("Ingresa un título para inspirar el borrador");
+                return;
+            }
+
+            const originalHtml = asistenteBtn.innerHTML;
+            asistenteBtn.innerHTML = "<i class='fas fa-pen-nib animate-pulse'></i> Redactando...";
+            asistenteBtn.disabled = true;
+
+            const systemPrompt = "Actúas como un erudito y refinado escritor de teología sistemática clásica. Tu estilo destaca por ser solemne, preciso y espiritualmente profundo. Escribe una reflexión devocional enriquecida en base al título y la cita aportada. Devuelve únicamente de dos a tres párrafos impecables con excelente gramática en español, sin preámbulos, firmas ni saludos.";
+            const userQuery = `Redacta una reflexión elegante titulada "${titleField}" ${refField ? `con base en la porción bíblica de ${refField}` : ""}.`;
+
+            const apiKey = ""; // Left empty to seamlessly switch to internal local system fallback
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                if (text) {
+                    if (!contentField.value.trim()) {
+                        contentField.value = text;
+                    } else {
+                        contentField.value += "\n\n---\n\n" + text;
+                    }
+                    showToast("Borrador teológico complementado");
+                } else {
+                    generarTextoRespaldo(titleField, refField, contentField);
+                }
+            } catch (err) {
+                console.warn("Conexión de asistencia, generando con el motor teológico local de respaldo...", err);
+                generarTextoRespaldo(titleField, refField, contentField);
+            } finally {
+                asistenteBtn.innerHTML = originalHtml;
+                asistenteBtn.disabled = false;
+            }
+        }
+
+        function generarTextoRespaldo(title, ref, field) {
+            const cita = ref ? ` en base a ${ref}` : "";
+            const prosa = `La consideración profunda sobre "${title}"${cita} nos sumerge en una profunda adoración por las verdades inmutables reveladas a los santos. En el silencio del estudio y la contemplación de las Escrituras, encontramos que todo aspecto de la verdad divina encaja de manera perfecta para la edificación de la iglesia local.\n\nQue este escrito sirva de recordatorio solemne para que nuestras vidas y congregaciones no se desvíen de la sana doctrina ni de la sencillez de la devoción a nuestro Señor. Sigamos firmes y constantes en la contemplación de Su belleza.`;
+            
+            if (!field.value.trim()) {
+                field.value = prosa;
+            } else {
+                field.value += "\n\n---\n\n" + prosa;
+            }
+            showToast("Borrador teológico redactado localmente");
+        }
+
+        // Initialize App on Page Mount
+        window.onload = async function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            await initAuth();
+            syncTeologia();
+        };
+
+    </script>
+
+    <!-- Navigation Logic Script -->
+    <script>
+        function switchTab(tabId) {
+            const views = {
+                'feed': document.getElementById('view-feed'),
+                'publish': document.getElementById('view-publish'),
+                'detail': document.getElementById('view-article-detail')
+            };
+
+            const navFeed = document.getElementById('nav-feed');
+            const heroSection = document.getElementById('hero-section');
+
+            Object.keys(views).forEach(k => {
+                if(views[k]) views[k].classList.add('hidden');
+            });
+
+            if(views[tabId]) views[tabId].classList.remove('hidden');
+
+            if (tabId === 'feed') {
+                heroSection.classList.remove('hidden');
+                if (navFeed) {
+                    navFeed.classList.add('text-vintage-black', 'border-b', 'border-vintage-black');
+                    navFeed.classList.remove('text-vintage-gray');
+                }
+            } else {
+                heroSection.classList.add('hidden');
+                if (navFeed) {
+                    navFeed.classList.remove('text-vintage-black', 'border-b', 'border-vintage-black');
+                    navFeed.classList.add('text-vintage-gray');
+                }
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Instagram Simulator controls
+        function abrirSimuladorInstagram() {
+            const modal = document.getElementById('instagram-simulator-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function cerrarSimuladorInstagram() {
+            const modal = document.getElementById('instagram-simulator-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function ejecutarNavegacionSimulada() {
+            cerrarSimuladorInstagram();
+            switchTab('feed');
+            showToast("Abriendo 'Lugares Celestiales' en el Navegador de Instagram...");
+        }
+
+        // Share Link functionality
+        function copiarEnlaceBio() {
+            const tempInput = document.createElement("input");
+            tempInput.value = window.location.href;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            showToast("¡Enlace copiado! Pégalo en la biografía de @lugarescelestiales.official");
+        }
+
+        // Authentication administration access
+        function openLoginModal() {
+            const indicator = document.getElementById('admin-indicator');
+            if (indicator && !indicator.classList.contains('hidden')) {
+                switchTab('publish');
+                return;
+            }
+
+            const modal = document.getElementById('login-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLoginModal() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.getElementById('login-form').reset();
+        }
+
+        // Display minimalist editorial Toast alerts
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
