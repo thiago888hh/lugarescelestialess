@@ -316,7 +316,7 @@
                         <!-- IG Bio details and Link -->
                         <div class="px-4 pt-2.5 space-y-0.5">
                             <span class="font-bold block text-xs">Lugares Celestiales</span>
-                            <span class="text-[10px] text-neutral-300 block">"La teología es la base de una iglesia sana."</span>
+                            <span class="text-[10px] text-neutral-300 block font-sans">"La teología es la base de una iglesia sana."</span>
                             <span class="text-[10px] text-neutral-400 block font-serif italic">Soli Deo Gloria</span>
                             
                             <!-- The Instagram Bio Link! -->
@@ -458,7 +458,7 @@
         // Environment Parameters
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'lugares-celestiales-v2';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "",
+            apiKey: "", // Left empty for automatic local mode bypass
             authDomain: "dummy.firebaseapp.com",
             projectId: "dummy-project",
             storageBucket: "dummy.appspot.com",
@@ -468,9 +468,7 @@
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : undefined;
 
         // Firebase Initializations
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
+        let app, db, auth;
 
         // Global State Variables
         let articlesList = [];
@@ -528,25 +526,6 @@
             }
         }
 
-        // Monitoring Session States
-        onAuthStateChanged(auth, (user) => {
-            if (user && !user.isAnonymous) {
-                currentAdminUser = user;
-                document.getElementById('admin-indicator').classList.remove('hidden');
-                document.getElementById('admin-indicator').classList.add('flex');
-                document.getElementById('btn-admin-gate').textContent = "Mesa de Redacción";
-                document.getElementById('btn-admin-logout').classList.remove('hidden');
-                actualizarVistasAdmin(true);
-            } else {
-                currentAdminUser = null;
-                document.getElementById('admin-indicator').classList.add('hidden');
-                document.getElementById('admin-indicator').classList.remove('flex');
-                document.getElementById('btn-admin-gate').textContent = "Acceso Administrativo";
-                document.getElementById('btn-admin-logout').classList.add('hidden');
-                actualizarVistasAdmin(false);
-            }
-        });
-
         function actualizarVistasAdmin(isAdmin) {
             const adminActions = document.getElementById('admin-actions');
             if (adminActions) {
@@ -601,10 +580,7 @@
                 }
             }, (error) => {
                 console.error("Error al sincronizar datos:", error);
-                // Robust client-side offline fallback
-                articlesList = seedArticles.map((s, idx) => ({ id: `seed-${idx}`, ...s }));
-                filteredArticlesList = [...articlesList];
-                renderArticlesList();
+                cargarModoLocal("Fallo de sincronización. Cargando modo local.");
             });
         }
 
@@ -714,7 +690,7 @@
         const publishForm = document.getElementById('publish-form');
         publishForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            if (!auth.currentUser || auth.currentUser.isAnonymous) {
+            if (typeof auth === 'undefined' || !auth || !auth.currentUser || auth.currentUser.isAnonymous) {
                 showToast("Acción restringida a editores autorizados");
                 return;
             }
@@ -762,7 +738,7 @@
 
         // Delete article
         async function deleteArticle(id) {
-            if (!auth.currentUser || auth.currentUser.isAnonymous) {
+            if (typeof auth === 'undefined' || !auth || !auth.currentUser || auth.currentUser.isAnonymous) {
                 showToast("Acción exclusiva para administradores");
                 return;
             }
@@ -812,6 +788,11 @@
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-password').value;
 
+            if (typeof auth === 'undefined' || !auth) {
+                showToast("La base de datos está desconectada.");
+                return;
+            }
+
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 closeLoginModal();
@@ -824,6 +805,7 @@
         }
 
         window.logoutAdmin = async function() {
+            if (typeof auth === 'undefined' || !auth) return;
             try {
                 await signOut(auth);
                 await signInAnonymously(auth);
@@ -850,7 +832,7 @@
             asistenteBtn.innerHTML = "<i class='fas fa-pen-nib animate-pulse'></i> Redactando...";
             asistenteBtn.disabled = true;
 
-            const systemPrompt = "Actúas como un erudito y refinado escritor de teología sistemática clásica. Tu estilo destaca por ser solemne, preciso y espiritualmente profundo. Escribe una reflexión devocional enriquecida en base al título y la cita aportada. Devuelve únicamente de dos a tres párrafos impecables con excelente gramática en español, sin preámbulos, firmas ni saludos.";
+            const systemPrompt = "Actúas como un erudito y de teología sistemática clásica. Tu estilo destaca por ser solemne, preciso y espiritualmente profundo. Escribe una reflexión devocional enriquecida en base al título y la cita aportada. Devuelve únicamente de dos a tres párrafos impecables con excelente gramática en español, sin preámbulos, firmas ni saludos.";
             const userQuery = `Redacta una reflexión elegante titulada "${titleField}" ${refField ? `con base en la porción bíblica de ${refField}` : ""}.`;
 
             const apiKey = ""; // Left empty to seamlessly switch to internal local system fallback
@@ -901,11 +883,61 @@
             showToast("Borrador teológico redactado localmente");
         }
 
+        // Local Mode Initializer
+        function cargarModoLocal(reason) {
+            console.log(reason);
+            // Convert seed articles to live list
+            articlesList = seedArticles.map((s, idx) => ({ id: `seed-${idx}`, ...s }));
+            filteredArticlesList = [...articlesList];
+            
+            // Build feed instantly
+            renderArticlesList();
+
+            // Hide loading state completely and hide Admin gate since firebase isn't active
+            const btnAdmin = document.getElementById('btn-admin-gate');
+            if (btnAdmin) btnAdmin.style.display = 'none';
+        }
+
         // Initialize App on Page Mount
         window.onload = async function() {
             document.getElementById('current-year').textContent = new Date().getFullYear();
-            await initAuth();
-            syncTeologia();
+            
+            // Direct Local Mode Check (Bypasses Firebase if no API key is specified)
+            if (!firebaseConfig || !firebaseConfig.apiKey) {
+                cargarModoLocal("Sin configuración de base de datos activa. Cargando archivo en modo local de inmediato.");
+                return;
+            }
+
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Monitoring Session States if initialized
+                onAuthStateChanged(auth, (user) => {
+                    if (user && !user.isAnonymous) {
+                        currentAdminUser = user;
+                        document.getElementById('admin-indicator').classList.remove('hidden');
+                        document.getElementById('admin-indicator').classList.add('flex');
+                        document.getElementById('btn-admin-gate').textContent = "Mesa de Redacción";
+                        document.getElementById('btn-admin-logout').classList.remove('hidden');
+                        actualizarVistasAdmin(true);
+                    } else {
+                        currentAdminUser = null;
+                        document.getElementById('admin-indicator').classList.add('hidden');
+                        document.getElementById('admin-indicator').classList.remove('flex');
+                        document.getElementById('btn-admin-gate').textContent = "Acceso Administrativo";
+                        document.getElementById('btn-admin-logout').classList.add('hidden');
+                        actualizarVistasAdmin(false);
+                    }
+                });
+
+                await initAuth();
+                syncTeologia();
+            } catch (err) {
+                console.error("Fallo durante la inicialización de red. Cargando modo local de respaldo...", err);
+                cargarModoLocal("Error de conexión. Iniciado en modo local.");
+            }
         };
 
     </script>
