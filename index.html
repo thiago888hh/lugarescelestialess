@@ -9,7 +9,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -51,26 +51,18 @@
 
     <nav class="bg-vintage-bg/95 border-b border-vintage-border sticky top-0 z-40 w-full backdrop-blur-md">
         <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="handleLogoClick()">
+            <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="switchTab('feed')">
                 LUGARES<br><span class="text-vintage-accent">CELESTIALES.</span>
             </div>
             <div class="flex flex-wrap justify-center items-center gap-6 font-sans text-xs uppercase tracking-widest font-semibold">
                 <button onclick="switchTab('feed')" id="nav-feed" class="text-vintage-black border-b border-vintage-black pb-1 transition duration-200">
                     Inicio
                 </button>
-                <button onclick="switchTab('admin')" id="nav-admin" class="hidden text-vintage-gray hover:text-vintage-black pb-1 transition duration-200 flex items-center gap-1.5">
-                    <i class="far fa-edit"></i> Redactar / Subir Escritos
-                </button>
-                
-                <!-- Divisor estético para las redes sociales -->
-                <span class="text-vintage-border hidden sm:inline">|</span>
-                
-                <!-- Redes sociales añadidas arriba -->
-                <div class="flex items-center gap-4">
-                    <a href="https://instagram.com/lugarescelestiales.official" target="_blank" rel="noopener noreferrer" class="text-vintage-gray hover:text-vintage-black transition text-sm flex items-center justify-center" title="Instagram">
+                <div class="flex items-center gap-3 border-l border-vintage-border pl-6">
+                    <a href="https://www.instagram.com/lugarescelestiales.official" target="_blank" class="text-vintage-gray hover:text-pink-600 transition text-sm">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="https://www.youtube.com/channel/UC2amcHiKLx6COp5WUcZ17Pw" target="_blank" rel="noopener noreferrer" class="text-vintage-gray hover:text-vintage-black transition text-sm flex items-center justify-center" title="Canal de YouTube">
+                    <a href="https://www.youtube.com/channel/UC2amcHiKLx6COp5WUcZ17Pw" target="_blank" class="text-vintage-gray hover:text-red-600 transition text-sm">
                         <i class="fab fa-youtube"></i>
                     </a>
                 </div>
@@ -91,8 +83,6 @@
     </div>
 
     <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">
-        
-        <!-- Feed View (Article List) -->
         <div id="view-feed" class="block space-y-8 fade-in">
             <div class="text-center">
                 <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Enseñanza y materiales</h2>
@@ -112,7 +102,6 @@
             </div>
         </div>
 
-        <!-- Article Detail View -->
         <div id="view-article-detail" class="hidden fade-in">
             <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider mb-8 transition">
                 &larr; Volver
@@ -120,13 +109,7 @@
             <article class="bg-vintage-bg border border-vintage-border p-6 md:p-12 shadow-sm rounded-sm relative">
                 <header class="text-center border-b border-vintage-border pb-8 mb-8">
                     <span id="detail-reference" class="font-sans text-xs uppercase tracking-[0.2em] text-vintage-accent block mb-3"></span>
-                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium leading-tight mb-2"></h1>
-                    
-                    <!-- Subtítulo dinámico para artículos con material de discipulado adjunto -->
-                    <div id="detail-discipulado-subtitle" class="hidden text-vintage-accent font-sans text-[11px] uppercase tracking-wider font-bold mb-4">
-                        Material práctico con fines de discipulado
-                    </div>
-
+                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium leading-tight mb-4"></h1>
                     <div class="font-serif italic text-vintage-gray text-base md:text-lg">
                         Escrito por <span id="detail-author" class="font-medium text-vintage-black"></span>
                     </div>
@@ -136,375 +119,71 @@
                         <img id="detail-image" src="" alt="Artículo" class="w-full h-full object-cover grayscale opacity-95 hover:grayscale-0 transition duration-700">
                     </div>
                 </div>
-                
-                <!-- Main Body Content -->
                 <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line">
-                </div>
-
-                <!-- Printable Materials Section -->
-                <div id="detail-materials-section" class="max-w-2xl mx-auto mt-12 pt-8 border-t border-vintage-border hidden">
-                    <h4 class="font-serif text-lg font-semibold text-vintage-black mb-4 flex items-center gap-2">
-                        <i class="fas fa-print text-vintage-accent text-sm"></i>
-                        Guía de Discipulado e Imprimibles (PDF / Copiar)
-                    </h4>
-                    <p class="font-sans text-xs text-vintage-gray mb-4">
-                        Accede a esta guía preparada para tu grupo de estudio o congregación local. Puedes imprimirla directamente, guardarla como PDF o copiar su texto para usarla donde desees.
-                    </p>
-                    <div id="materials-list" class="space-y-3">
-                        <!-- Dynamic materials inject here -->
-                    </div>
                 </div>
             </article>
         </div>
-
-        <!-- Admin Panel View -->
-        <div id="view-admin" class="hidden fade-in space-y-12">
-            <div class="border-b border-vintage-border pb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Panel de Escritura</h2>
-                    <p class="font-sans text-xs text-vintage-gray uppercase tracking-widest mt-1">Sube tus escritos teológicos y asocia guías de discipulado</p>
-                </div>
-                <button onclick="lockAdmin()" class="bg-vintage-creamDark text-vintage-gray hover:text-red-700 font-sans text-[10px] uppercase tracking-widest font-bold py-2 px-4 rounded-sm border border-vintage-border transition">
-                    <i class="fas fa-lock mr-1.5"></i> Bloquear Acceso
-                </button>
-            </div>
-
-            <!-- Creation Form -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-6 bg-white p-6 md:p-8 border border-vintage-border rounded-sm shadow-sm">
-                    <h3 class="font-serif text-lg text-vintage-accent border-b border-vintage-border pb-3">Redactar Nuevo Artículo</h3>
-                    
-                    <form id="new-article-form" onsubmit="saveNewArticle(event)" class="space-y-5">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block font-sans text-xs uppercase tracking-wider text-vintage-gray font-semibold mb-1">Título del Artículo</label>
-                                <input type="text" id="form-title" required placeholder="Ej. El Carácter de Dios" class="w-full bg-vintage-bg border border-vintage-border rounded-sm py-2 px-3 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent">
-                            </div>
-                            <div>
-                                <label class="block font-sans text-xs uppercase tracking-wider text-vintage-gray font-semibold mb-1">Autor</label>
-                                <input type="text" id="form-author" required value="LUGARES CELESTIALES | THIAGO FRANZA" class="w-full bg-vintage-bg border border-vintage-border rounded-sm py-2 px-3 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block font-sans text-xs uppercase tracking-wider text-vintage-gray font-semibold mb-1">Imagen de Encabezado</label>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-2">
-                                <label class="flex items-center gap-2 p-2.5 bg-vintage-bg border border-vintage-border rounded-sm cursor-pointer hover:border-vintage-accent/60 transition">
-                                    <input type="radio" name="image-preset" value="bible" checked onclick="setImagePreset('bible')" class="text-vintage-accent focus:ring-0">
-                                    <span class="font-sans text-xs">Biblia & Estudio</span>
-                                </label>
-                                <label class="flex items-center gap-2 p-2.5 bg-vintage-bg border border-vintage-border rounded-sm cursor-pointer hover:border-vintage-accent/60 transition">
-                                    <input type="radio" name="image-preset" value="church" onclick="setImagePreset('church')" class="text-vintage-accent focus:ring-0">
-                                    <span class="font-sans text-xs">Catedral / Iglesia</span>
-                                </label>
-                                <label class="flex items-center gap-2 p-2.5 bg-vintage-bg border border-vintage-border rounded-sm cursor-pointer hover:border-vintage-accent/60 transition">
-                                    <input type="radio" name="image-preset" value="custom" onclick="setImagePreset('custom')" class="text-vintage-accent focus:ring-0">
-                                    <span class="font-sans text-xs">Enlace de imagen</span>
-                                </label>
-                            </div>
-                            <input type="url" id="form-image-url" placeholder="Pega un enlace de imagen (Unsplash, etc.)" class="hidden w-full bg-vintage-bg border border-vintage-border rounded-sm py-2 px-3 font-sans text-xs focus:outline-none focus:ring-1 focus:ring-vintage-accent">
-                        </div>
-
-                        <div>
-                            <label class="block font-sans text-xs uppercase tracking-wider text-vintage-gray font-semibold mb-1">Cuerpo / Contenido del Artículo</label>
-                            <textarea id="form-content" required rows="8" placeholder="Escribe tu artículo aquí. Puedes separar los párrafos de manera estándar. Puedes usar <strong> para negritas." class="w-full bg-vintage-bg border border-vintage-border rounded-sm py-2 px-3 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent"></textarea>
-                        </div>
-
-                        <!-- Attach Print/PDF Doc Section -->
-                        <div class="border-t border-vintage-border pt-4">
-                            <label class="flex items-center gap-2 cursor-pointer select-none">
-                                <input type="checkbox" id="form-has-word" onchange="toggleWordForm()" class="rounded border-vintage-border text-vintage-accent focus:ring-vintage-accent">
-                                <span class="font-sans text-xs uppercase tracking-wider text-vintage-black font-semibold">¿Adjuntar guía de discipulado imprimible (PDF / Copiar)?</span>
-                            </label>
-
-                            <div id="word-form-section" class="hidden mt-4 space-y-4 bg-vintage-creamDark/30 p-4 border border-vintage-border rounded-sm">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block font-sans text-xs text-vintage-gray mb-1">Identificador (ej: Guía de Estudio)</label>
-                                        <input type="text" id="form-word-filename" placeholder="Guía de Estudio" class="w-full bg-white border border-vintage-border rounded-sm py-1.5 px-3 font-sans text-xs focus:outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block font-sans text-xs text-vintage-gray mb-1">Título de la Sección (ej: Preguntas para el líder)</label>
-                                        <input type="text" id="form-word-label" placeholder="Preguntas Prácticas de Discipulado" class="w-full bg-white border border-vintage-border rounded-sm py-1.5 px-3 font-sans text-xs focus:outline-none">
-                                    </div>
-                                </div>
-                                <div>
-                                    <label class="block font-sans text-xs text-vintage-gray mb-1">Contenido de la Guía Imprimible</label>
-                                    <textarea id="form-word-body" rows="6" placeholder="Escribe el cuestionario, bosquejo o material que la gente podrá imprimir o copiar para su discipulado." class="w-full bg-white border border-vintage-border rounded-sm py-1.5 px-3 font-serif text-sm focus:outline-none"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-2 flex justify-end">
-                            <button type="submit" class="bg-vintage-black text-white hover:bg-vintage-accent font-sans text-xs uppercase tracking-wider font-semibold py-3 px-6 rounded-sm transition">
-                                <i class="fas fa-plus mr-1.5"></i> Guardar y Publicar
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="space-y-6">
-                    <div class="bg-white p-6 border border-vintage-border rounded-sm shadow-sm space-y-4">
-                        <div class="flex items-center justify-between border-b border-vintage-border pb-3">
-                            <h3 class="font-serif text-base text-vintage-black font-semibold">Tus Artículos</h3>
-                            <button onclick="requestRestoreSeeds()" class="text-[10px] text-vintage-accent hover:underline font-semibold uppercase tracking-wider">Restaurar Semillas</button>
-                        </div>
-                        <p class="font-sans text-[11px] text-vintage-gray leading-relaxed">
-                            Aquí puedes ver los artículos activos y eliminarlos. Las semillas de ejemplo siempre pueden restaurarse.
-                        </p>
-                        <div id="admin-articles-list" class="space-y-3 max-h-[420px] overflow-y-auto pr-1">
-                            <!-- Dynamic manage list here -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
 
-    <!-- Modal para entrada de contraseña secreta -->
-    <div id="password-modal-backdrop" class="fixed inset-0 bg-black/45 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-vintage-bg border border-vintage-border p-6 rounded-md shadow-xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300" id="password-modal-content">
-            <div class="text-center mb-4">
-                <div class="w-10 h-10 bg-vintage-accent/10 border border-vintage-border rounded-full flex items-center justify-center mx-auto text-vintage-accent mb-2">
-                    <i class="fas fa-key text-sm"></i>
-                </div>
-                <h3 class="font-serif text-lg font-semibold text-vintage-black">Acceso de Editor</h3>
-                <p class="font-sans text-[11px] text-vintage-gray leading-relaxed">Ingresa la contraseña para desbloquear el panel de escritura.</p>
-            </div>
-            <div class="space-y-4 font-sans text-xs">
-                <input type="password" id="admin-pass-input" placeholder="Contraseña de acceso" class="w-full bg-vintage-creamDark border border-vintage-border rounded-sm py-2 px-3 focus:outline-none focus:ring-1 focus:ring-vintage-accent">
-                <p id="password-error" class="text-red-600 text-[10px] hidden font-semibold uppercase tracking-wider text-center">Contraseña incorrecta</p>
-                <div class="flex justify-end gap-3 font-semibold uppercase tracking-wider text-[11px] pt-2">
-                    <button onclick="closePasswordPrompt()" class="py-2 px-3 bg-vintage-creamDark text-vintage-gray rounded-sm hover:bg-vintage-border transition">Cancelar</button>
-                    <button onclick="submitAdminPassword()" class="py-2 px-4 bg-vintage-black text-white rounded-sm hover:bg-vintage-accent transition">Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Custom elegant confirmation dialogues to replace browser's native alert/confirm -->
-    <div id="custom-modal-backdrop" class="fixed inset-0 bg-black/45 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-vintage-bg border border-vintage-border p-6 rounded-md shadow-xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300" id="custom-modal-content">
-            <h3 id="custom-modal-title" class="font-serif text-lg font-semibold text-vintage-black mb-2"></h3>
-            <p id="custom-modal-msg" class="font-sans text-xs text-vintage-gray mb-6 leading-relaxed"></p>
-            <div class="flex justify-end gap-3 font-sans text-xs uppercase tracking-wider font-semibold">
-                <button id="custom-modal-cancel" class="py-2.5 px-4 bg-vintage-creamDark text-vintage-gray rounded-sm hover:bg-vintage-border transition">Cancelar</button>
-                <button id="custom-modal-confirm" class="py-2.5 px-4 bg-vintage-black text-white rounded-sm hover:bg-vintage-accent transition">Confirmar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast alerts -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none"></div>
-
     <footer class="bg-vintage-bg border-t border-vintage-border mt-auto py-8">
-        <div class="max-w-3xl mx-auto px-4 text-center text-vintage-gray flex flex-col items-center gap-3 select-none">
-            <!-- Copyright y acceso oculto -->
-            <div class="font-sans text-[10px] uppercase tracking-widest">
-                &copy; <span id="current-year"></span> <span class="cursor-pointer hover:text-vintage-accent transition" ondblclick="openPasswordPrompt()">Lugares Celestiales</span>
-            </div>
-            
-            <!-- Abreviación con la tipografía serif de los artículos -->
-            <div class="font-serif italic text-lg text-vintage-accent tracking-widest mt-0.5">
-                L.C.
-            </div>
+        <div class="max-w-3xl mx-auto px-4 text-center text-vintage-gray font-sans text-[10px] uppercase tracking-widest">
+            &copy; <span id="current-year"></span> Lugares Celestiales.<br>
+            <span class="font-serif italic text-[11px] opacity-70">L.C.</span>
         </div>
     </footer>
 
     <script type="module">
-        const presetImages = {
-            bible: "https://images.unsplash.com/photo-1543165796-5426273eaab3?w=800&h=600&fit=crop",
-            church: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=800&h=600&fit=crop",
-            custom: ""
-        };
-
-        const EDIT_PASSWORD = "thiago"; // Contraseña secreta para entrar al panel
-        let logoClickCount = 0;
-        let selectedPreset = 'bible';
-        let pendingModalAction = null;
-
-        // Semillas por defecto limpias sin materiales previos creados por el asistente
-        const defaultArticles = [
+        const seedArticles = [
             {
-                id: "seed-1",
                 title: "Cuarto de Oración",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Hechos 2:42",
                 content: "El cuarto de oración no es solo un lugar físico sino un lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración (Hechos 2:42). La iglesia primitiva vivía con una teología sana, pero también con la práctica de las oraciones y de partir el pan juntos.",
-                imageUrl: "https://images.unsplash.com/photo-1543165796-5426273eaab3?w=800&h=600&fit=crop",
-                materials: []
+                imageUrl: "WhatsApp Image 2026-06-17 at 18.15.25.jpeg"
             },
             {
-                id: "seed-2",
                 title: "Cristología",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
-                content: "la cristología es un asunto que el padre quiere revelarnos en estos dias, aunque siempre fue un asunto teologico e historico, <strong>si la cristología no es el centro de nuestros contextos eclesiales y etnicos estamos errados en nuestros pensamientos, cuan importante es la cristologia en los contextos ecelsiales y etnico</strong> la cristología lo es todo, es la base del evangelio es el decenlase, la cristología es el evangelio, los apostoles y profetas se nutrian de la cristología temprana del A. T (hebreos 1:1-2)\n\n" +
-                         "<div class=\"border-l-4 border-vintage-accent pl-4 py-2 my-6 italic text-vintage-gray bg-vintage-creamDark/40 pr-3 rounded-r-sm\">«En otros tiempos el padre nos hablaba por medios de los profetas y otros medios. pero en estos últimos días nos habla por medio del hijo»<br><span class=\"block text-xs font-sans uppercase tracking-widest font-semibold text-vintage-accent mt-1.5 not-italic\">— CARLOS SMARRA</span></div>\n\n" +
-                         "Que juntos podamos ser nutridos de esta reality y ser edificados a medida que lo contemplamos (efesios 4:13-14, 2 corintios 3:18)",
-                imageUrl: "https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&h=600&fit=crop",
-                materials: []
+                reference: "Hebreos 1:1-2",
+                content: "la cristología es un asunto que el padre quiere revelarnos en estos dias, aunque siempre fue un asunto teologico e historico, <strong>si la cristología no es el centro de nuestros contextos eclesiales y etnicos estamos errados en nuestros pensamientos, cuan importante es la cristologia en los contextos ecelsiales y etnico</strong> la cristología lo es todo, es la base del evangelio es el decenlase, la cristología es el evangelio, los apostoles y profetas se nutrian de la cristología temprana del A. T (hebreos 1:1-2)\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (efesios 4:13-14, 2 corintios 3:18)",
+                imageUrl: "WhatsApp Image 2026-06-17 at 18.15.25 (3).jpeg"
             },
             {
-                id: "seed-3",
                 title: "Israel",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
-                content: "israel es un asunto biblico e historico, el antisemitismo es el gran enemigo pero ¿que debe hacer la igle ante esta situacion?\n\n" +
-                         "<div class=\"border-l-4 border-vintage-accent pl-4 py-2 my-6 italic text-vintage-gray bg-vintage-creamDark/40 pr-3 rounded-r-sm\"><strong>«señor Jesucristo, me ofrezco para ayudar a tu pueblo. De cualquier manera posible. En cualquier lugar. En cualquier momento»</strong><br><span class=\"block text-xs font-sans uppercase tracking-widest font-semibold text-vintage-accent mt-1.5 not-italic\">— CORRIE TEN BOOM</span></div>\n\n" +
-                         "israel ha sido destinado como el lugar de descanso eterno para un rey judio, la cristología temprana del A.T nace en una identidad judía, y su desarrollo nos sigue contando lo mismo JESUSCRISTO ES JUDIO (mt 23:37) el celo por Israel fue un pilar en el ministerio de Jesús, su compromiso con lo local es clave para el desarrollo global. la iglesia ha caido en el antisemitismo pero eso no puede suceder en una iglesia teologicamente preparada.\n\n<span class=\"block font-sans uppercase text-[11px] font-bold text-vintage-accent tracking-widest mt-8\">IREMOS DEJANDO MATERIAL EN FORMATO PDF PARA EL DISIPULADO EN ESTA AREA</span>",
-                imageUrl: "https://images.unsplash.com/photo-1544413660-299165566b1d?w=800&h=600&fit=crop",
-                materials: []
+                reference: "Romanos 11:1-2",
+                content: "israel es un asunto biblico e historico, el antisemitismo es el gran enemigo pero ¿que debe hacer la igle ante esta situacion?\n\nisrael ha sido destinado como el lugar de descanso eterno para un rey judio, la cristología temprana del A.T nace en una identidad judía, y su desarrollo nos sigue contando lo mismo JESUSCRISTO ES JUDIO (mt 23:37) el celo por Israel fue un pilar en el ministerio de Jesús, su compromiso con lo local es clave para el desarrollo global. la iglesia ha caido en el antisemitismo pero eso no puede suceder en una iglesia teologicamente preparada.",
+                imageUrl: "WhatsApp Image 2026-06-17 at 18.15.25 (2).jpeg"
             },
             {
-                id: "seed-4",
                 title: "Recursos para tu Iglesia",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Efesios 4:13-14",
                 content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, mas también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras.",
-                imageUrl: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=800&h=600&fit=crop",
-                materials: []
+                imageUrl: "https://images.unsplash.com/photo-1438032005730-c779502df39b?w=800&h=600&fit=crop"
             }
         ];
 
-        let articles = [];
-
         window.onload = function() {
             document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // Cargar datos persistidos o inicializar con las semillas limpias
-            const stored = localStorage.getItem('lugares_celestiales_articles_clean_v3');
-            if (stored) {
-                articles = JSON.parse(stored);
-            } else {
-                articles = [...defaultArticles];
-                localStorage.setItem('lugares_celestiales_articles_clean_v3', JSON.stringify(articles));
-            }
-            
-            // Comprobar estado de acceso del editor en este navegador
-            if (localStorage.getItem('lc_admin_unlocked') === 'true') {
-                unlockAdminUI();
-            }
-            
-            renderArticles(articles);
-            renderAdminArticles();
+            renderArticles(seedArticles);
         };
 
-        // Activadores del acceso oculto
-        window.handleLogoClick = function() {
-            logoClickCount++;
-            if (logoClickCount >= 5) {
-                logoClickCount = 0;
-                openPasswordPrompt();
-            } else {
-                switchTab('feed');
-            }
-        }
-
-        window.openPasswordPrompt = function() {
-            const backdrop = document.getElementById('password-modal-backdrop');
-            const content = document.getElementById('password-modal-content');
-            const input = document.getElementById('admin-pass-input');
-            const error = document.getElementById('password-error');
-            
-            input.value = '';
-            error.classList.add('hidden');
-            
-            backdrop.classList.remove('hidden');
-            setTimeout(() => {
-                backdrop.classList.remove('opacity-0');
-                content.classList.remove('scale-95');
-                input.focus();
-            }, 10);
-        }
-
-        window.closePasswordPrompt = function() {
-            const backdrop = document.getElementById('password-modal-backdrop');
-            const content = document.getElementById('password-modal-content');
-            backdrop.classList.add('opacity-0');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                backdrop.classList.add('hidden');
-            }, 300);
-        }
-
-        window.submitAdminPassword = function() {
-            const password = document.getElementById('admin-pass-input').value;
-            const error = document.getElementById('password-error');
-            
-            if (password === EDIT_PASSWORD) {
-                localStorage.setItem('lc_admin_unlocked', 'true');
-                unlockAdminUI();
-                closePasswordPrompt();
-                showToast("Acceso desbloqueado", "success");
-                switchTab('admin');
-            } else {
-                error.classList.remove('hidden');
-                document.getElementById('admin-pass-input').select();
-            }
-        }
-
-        // Detectar tecla ENTER en input de contraseña
-        document.getElementById('admin-pass-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                submitAdminPassword();
-            }
-        });
-
-        function unlockAdminUI() {
-            const navBtn = document.getElementById('nav-admin');
-            navBtn.classList.remove('hidden');
-            navBtn.classList.add('flex');
-        }
-
-        function lockAdminUI() {
-            const navBtn = document.getElementById('nav-admin');
-            navBtn.classList.add('hidden');
-            navBtn.classList.remove('flex');
-        }
-
-        window.lockAdmin = function() {
-            showCustomConfirm(
-                "¿Bloquear Panel?",
-                "Se cerrará tu sesión de edición y el botón de redacción volverá a ocultarse para los lectores.",
-                () => {
-                    localStorage.removeItem('lc_admin_unlocked');
-                    lockAdminUI();
-                    switchTab('feed');
-                    showToast("Acceso cerrado correctamente", "info");
-                }
-            );
-        }
-
-        // Renderizado del Feed Principal
         function renderArticles(list) {
             const container = document.getElementById('articles-container');
             container.innerHTML = '';
-            
-            if (list.length === 0) {
-                 container.innerHTML = '<p class="font-serif text-vintage-gray text-center py-12 italic">No se encontraron escritos que coincidan con la búsqueda.</p>';
-                 return;
-            }
-
             list.forEach(article => {
                 const item = document.createElement('div');
                 item.className = `flex items-center justify-between py-6 group cursor-pointer hover:bg-vintage-creamDark/45 transition duration-300 px-3 -mx-3 border-b border-vintage-border`;
                 item.onclick = () => showDetail(article);
-                
-                // Subtítulo condicional: "Material práctico con fines de discipulado" si tiene un material adjunto
-                const hasMaterialsBadge = article.materials && article.materials.length > 0 
-                    ? `<span class="inline-flex items-center gap-1 bg-vintage-accent/10 text-vintage-accent text-[9.5px] px-2.5 py-0.5 rounded-sm font-sans uppercase font-bold mt-2 tracking-wide"><i class="fas fa-print"></i> Material práctico con fines de discipulado</span>`
-                    : '';
-
                 item.innerHTML = `
-                    <div class="flex items-center gap-6 w-full">
-                        <div class="relative w-16 h-16 bg-neutral-200 overflow-hidden border border-vintage-border rounded-sm flex-shrink-0">
-                            <img src="${article.imageUrl || presetImages.bible}" class="w-full h-full object-cover grayscale transition duration-300 group-hover:grayscale-0" onerror="this.src='https://placehold.co/150x150/FAF6EE/8C7547?text=Teologia'">
+                    <div class="flex items-center gap-6">
+                        <div class="relative w-16 h-16 bg-neutral-200 overflow-hidden border border-vintage-border rounded-sm">
+                            <img src="${article.imageUrl}" class="w-full h-full object-cover grayscale transition duration-300 group-hover:grayscale-0" onerror="this.src='https://placehold.co/100x100/E8E6E0/6B6A67?text=LC'">
                         </div>
-                        <div class="flex-grow">
+                        <div>
                             <span class="font-sans text-[9px] uppercase tracking-widest text-vintage-accent font-semibold block">${article.author}</span>
-                            <h3 class="font-serif text-lg text-vintage-black font-semibold mt-0.5">${article.title}</h3>
-                            ${hasMaterialsBadge}
-                        </div>
-                        <div class="text-vintage-gray opacity-40 group-hover:opacity-100 group-hover:text-vintage-accent transition pl-2">
-                            <i class="fas fa-chevron-right text-xs"></i>
+                            <h3 class="font-serif text-lg text-vintage-black font-semibold mt-1">${article.title}</h3>
                         </div>
                     </div>
                 `;
@@ -514,402 +193,23 @@
 
         window.filterArticles = function() {
             const query = document.getElementById('search-input').value.toLowerCase();
-            const filtered = articles.filter(a => 
-                a.title.toLowerCase().includes(query) || 
-                (a.content && a.content.toLowerCase().includes(query)) ||
-                (a.author && a.author.toLowerCase().includes(query))
-            );
+            const filtered = seedArticles.filter(a => a.title.toLowerCase().includes(query) || a.content.toLowerCase().includes(query) || a.author.toLowerCase().includes(query));
             renderArticles(filtered);
         }
 
         function showDetail(article) {
             document.getElementById('detail-title').textContent = article.title;
             document.getElementById('detail-author').textContent = article.author;
+            document.getElementById('detail-reference').textContent = article.reference || "";
             document.getElementById('detail-content').innerHTML = article.content;
-            document.getElementById('detail-reference').textContent = "";
-            
-            const detailImg = document.getElementById('detail-image');
-            detailImg.src = article.imageUrl || presetImages.bible;
-            detailImg.onerror = function() {
-                this.src = "https://placehold.co/800x600/FAF6EE/8C7547?text=Lugares+Celestiales";
-            };
-
-            const materialsSection = document.getElementById('detail-materials-section');
-            const materialsList = document.getElementById('materials-list');
-            const discipuladoSubtitle = document.getElementById('detail-discipulado-subtitle');
-            
-            materialsList.innerHTML = '';
-
-            // Mostrar el subtítulo y la sección de materiales únicamente si existen guías adjuntas
-            if (article.materials && article.materials.length > 0) {
-                discipuladoSubtitle.classList.remove('hidden');
-                materialsSection.classList.remove('hidden');
-                article.materials.forEach((mat) => {
-                    const card = document.createElement('div');
-                    card.className = "flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-vintage-creamDark/40 border border-vintage-border rounded-md gap-4 hover:border-vintage-accent/40 transition duration-300";
-                    
-                    const safeLabel = mat.label.replace(/'/g, "\\'");
-                    const safeBody = encodeURIComponent(mat.documentBody);
-                    
-                    card.innerHTML = `
-                        <div class="flex items-center gap-4">
-                            <div class="text-vintage-accent bg-vintage-accent/5 w-11 h-11 flex items-center justify-center rounded-sm border border-vintage-border flex-shrink-0">
-                                <i class="fas fa-print text-lg"></i>
-                            </div>
-                            <div>
-                                <span class="block font-sans text-[10px] font-semibold text-vintage-accent uppercase tracking-wider">${mat.wordsCount || 'Estudio Teológico'}</span>
-                                <h5 class="font-serif text-sm font-semibold text-vintage-black mt-0.5">${mat.label}</h5>
-                                <span class="block text-[11px] text-vintage-gray font-sans mt-0.5">${mat.filename}</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-                            <button onclick="copiarTextoAlPortapapeles('${safeLabel}', '${safeBody}')" class="w-full sm:w-auto bg-vintage-creamDark hover:bg-vintage-border text-vintage-black font-sans text-[11px] uppercase tracking-wider font-semibold py-2 px-3 rounded-sm transition flex items-center justify-center gap-1.5 border border-vintage-border">
-                                <i class="far fa-copy"></i> Copiar Texto
-                            </button>
-                            <button onclick="abrirEImprimirPDF('${safeLabel}', '${safeBody}')" class="w-full sm:w-auto bg-vintage-black text-white hover:bg-vintage-accent font-sans text-[11px] uppercase tracking-wider font-semibold py-2 px-3 rounded-sm transition flex items-center justify-center gap-1.5">
-                                <i class="fas fa-print"></i> Guardar PDF / Imprimir
-                            </button>
-                        </div>
-                    `;
-                    materialsList.appendChild(card);
-                });
-            } else {
-                discipuladoSubtitle.classList.add('hidden');
-                materialsSection.classList.add('hidden');
-            }
-            
-            const contentDetail = document.getElementById('view-article-detail');
-            contentDetail.classList.remove('fade-in');
-            void contentDetail.offsetWidth; 
-            contentDetail.classList.add('fade-in');
-            
+            document.getElementById('detail-image').src = article.imageUrl;
             switchTab('detail');
-        }
-
-        window.abrirEImprimirPDF = function(title, encodedBody) {
-            const decodedBody = decodeURIComponent(encodedBody);
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <html>
-                <head>
-                    <title>${title} - Lugares Celestiales</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400;0,700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-                    <style>
-                        body {
-                            font-family: 'Inter', sans-serif;
-                            line-height: 1.6;
-                            color: #1a1a1a;
-                            padding: 40px;
-                            max-width: 800px;
-                            margin: 0 auto;
-                        }
-                        h1 {
-                            font-family: 'Playfair Display', serif;
-                            color: #8C7547;
-                            font-size: 28px;
-                            border-bottom: 1px solid #E8E6E0;
-                            padding-bottom: 12px;
-                            margin-bottom: 24px;
-                            margin-top: 20px;
-                        }
-                        .content {
-                            font-size: 15px;
-                            text-align: justify;
-                            white-space: pre-line;
-                        }
-                        .meta {
-                            font-size: 11px;
-                            color: #6B6A67;
-                            text-transform: uppercase;
-                            letter-spacing: 1.5px;
-                            margin-bottom: 20px;
-                        }
-                        .footer {
-                            margin-top: 60px;
-                            font-size: 11px;
-                            color: #8C7547;
-                            border-top: 1px solid #E8E6E0;
-                            padding-top: 16px;
-                            text-align: center;
-                            font-family: 'Playfair Display', serif;
-                            font-style: italic;
-                        }
-                        @media print {
-                            .no-print { display: none !important; }
-                        }
-                        .btn-print {
-                            display: inline-block;
-                            background: #1A1A1A;
-                            color: white;
-                            padding: 10px 20px;
-                            border-radius: 2px;
-                            text-decoration: none;
-                            font-family: sans-serif;
-                            font-size: 12px;
-                            font-weight: 600;
-                            text-transform: uppercase;
-                            letter-spacing: 1px;
-                            margin-bottom: 20px;
-                            cursor: pointer;
-                            border: none;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="no-print" style="text-align: right;">
-                        <button onclick="window.print()" class="btn-print">Imprimir / Guardar como PDF</button>
-                    </div>
-                    <div class="meta">Lugares Celestiales — Archivo de Discipulado Teológico</div>
-                    <h1>${title}</h1>
-                    <div class="content">${decodedBody}</div>
-                    <div class="footer">
-                        © ${new Date().getFullYear()} Lugares Celestiales. Documento listo para uso e impresión local.
-                    </div>
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
-        }
-
-        window.copiarTextoAlPortapapeles = function(title, encodedBody) {
-            const decodedBody = decodeURIComponent(encodedBody);
-            const textToCopy = `${title}\n\n${decodedBody}\n\n© Lugares Celestiales — Material de Discipulado`;
-            
-            const textArea = document.createElement("textarea");
-            textArea.value = textToCopy;
-            textArea.style.position = "fixed"; 
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                document.execCommand('copy');
-                showToast("Texto copiado para pegar en WhatsApp o Docs", "success");
-            } catch (err) {
-                showToast("Error al copiar texto", "info");
-            }
-            
-            document.body.removeChild(textArea);
-        }
-
-        window.setImagePreset = function(type) {
-            selectedPreset = type;
-            const customInput = document.getElementById('form-image-url');
-            if (type === 'custom') {
-                customInput.classList.remove('hidden');
-                customInput.required = true;
-            } else {
-                customInput.classList.add('hidden');
-                customInput.required = false;
-            }
-        }
-
-        window.toggleWordForm = function() {
-            const hasWord = document.getElementById('form-has-word').checked;
-            const wordSection = document.getElementById('word-form-section');
-            
-            if (hasWord) {
-                wordSection.classList.remove('hidden');
-                document.getElementById('form-word-filename').required = true;
-                document.getElementById('form-word-label').required = true;
-                document.getElementById('form-word-body').required = true;
-            } else {
-                wordSection.classList.add('hidden');
-                document.getElementById('form-word-filename').required = false;
-                document.getElementById('form-word-label').required = false;
-                document.getElementById('form-word-body').required = false;
-            }
-        }
-
-        window.saveNewArticle = function(event) {
-            event.preventDefault();
-            
-            const title = document.getElementById('form-title').value.trim();
-            const author = document.getElementById('form-author').value.trim();
-            const content = document.getElementById('form-content').value.trim();
-            const hasWord = document.getElementById('form-has-word').checked;
-
-            let imageUrl = presetImages[selectedPreset];
-            if (selectedPreset === 'custom') {
-                imageUrl = document.getElementById('form-image-url').value.trim();
-            }
-
-            const materials = [];
-            if (hasWord) {
-                const filename = document.getElementById('form-word-filename').value.trim();
-                const label = document.getElementById('form-word-label').value.trim();
-                const body = document.getElementById('form-word-body').value.trim();
-                
-                materials.push({
-                    filename: filename,
-                    label: label,
-                    wordsCount: "Material de Discipulado",
-                    documentBody: body
-                });
-            }
-
-            const newArticle = {
-                id: 'article-' + Date.now(),
-                title: title,
-                author: author,
-                content: content,
-                imageUrl: imageUrl || presetImages.bible,
-                materials: materials
-            };
-
-            articles.unshift(newArticle);
-            
-            localStorage.setItem('lugares_celestiales_articles_clean_v3', JSON.stringify(articles));
-
-            renderArticles(articles);
-            renderAdminArticles();
-
-            document.getElementById('new-article-form').reset();
-            document.getElementById('word-form-section').classList.add('hidden');
-            document.getElementById('form-image-url').classList.add('hidden');
-            
-            showToast("Artículo publicado con éxito", "success");
-            switchTab('feed');
-        }
-
-        function renderAdminArticles() {
-            const adminList = document.getElementById('admin-articles-list');
-            adminList.innerHTML = '';
-
-            if (articles.length === 0) {
-                adminList.innerHTML = '<p class="font-sans text-xs text-vintage-gray italic text-center py-4">No hay artículos guardados.</p>';
-                return;
-            }
-
-            articles.forEach(article => {
-                const item = document.createElement('div');
-                item.className = "flex items-center justify-between p-3 bg-vintage-creamDark/30 border border-vintage-border rounded-sm text-xs";
-                
-                item.innerHTML = `
-                    <div class="truncate max-w-[180px] sm:max-w-[240px]">
-                        <span class="block font-serif font-semibold text-vintage-black truncate">${article.title}</span>
-                        <span class="font-sans text-[10px] text-vintage-accent block truncate">${article.author}</span>
-                    </div>
-                    <button onclick="requestDeleteArticle('${article.id}')" class="text-red-600 hover:text-red-800 p-2 font-sans text-[11px] font-semibold flex items-center gap-1">
-                        <i class="far fa-trash-alt"></i> Eliminar
-                    </button>
-                `;
-                adminList.appendChild(item);
-            });
-        }
-
-        function showCustomConfirm(title, message, onConfirm) {
-            const backdrop = document.getElementById('custom-modal-backdrop');
-            const content = document.getElementById('custom-modal-content');
-            
-            document.getElementById('custom-modal-title').textContent = title;
-            document.getElementById('custom-modal-msg').textContent = message;
-            
-            pendingModalAction = onConfirm;
-            
-            backdrop.classList.remove('hidden');
-            setTimeout(() => {
-                backdrop.classList.remove('opacity-0');
-                content.classList.remove('scale-95');
-            }, 10);
-        }
-
-        function closeCustomConfirm() {
-            const backdrop = document.getElementById('custom-modal-backdrop');
-            const content = document.getElementById('custom-modal-content');
-            
-            backdrop.classList.add('opacity-0');
-            content.classList.add('scale-95');
-            setTimeout(() => {
-                backdrop.classList.add('hidden');
-                pendingModalAction = null;
-            }, 300);
-        }
-
-        document.getElementById('custom-modal-cancel').onclick = closeCustomConfirm;
-        document.getElementById('custom-modal-confirm').onclick = function() {
-            if (pendingModalAction) {
-                pendingModalAction();
-            }
-            closeCustomConfirm();
-        };
-
-        window.requestDeleteArticle = function(id) {
-            showCustomConfirm(
-                "¿Eliminar artículo?",
-                "Esta acción quitará permanentemente el escrito de tu biblioteca local.",
-                () => {
-                    articles = articles.filter(a => a.id !== id);
-                    localStorage.setItem('lugares_celestiales_articles_clean_v3', JSON.stringify(articles));
-                    renderArticles(articles);
-                    renderAdminArticles();
-                    showToast("Artículo eliminado con éxito", "info");
-                }
-            );
-        }
-
-        window.requestRestoreSeeds = function() {
-            showCustomConfirm(
-                "¿Restaurar Semillas?",
-                "Esto restaurará los artículos originales por defecto de Lugares Celestiales, conservando también tus propios escritos actuales.",
-                () => {
-                    const existingIds = articles.map(a => a.id);
-                    const defaultToInsert = defaultArticles.filter(d => !existingIds.includes(d.id));
-                    articles = [...articles, ...defaultToInsert];
-                    localStorage.setItem('lugares_celestiales_articles_clean_v3', JSON.stringify(articles));
-                    renderArticles(articles);
-                    renderAdminArticles();
-                    showToast("Semillas restauradas con éxito", "success");
-                }
-            );
-        }
-
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            
-            const bgClass = type === 'success' ? 'bg-vintage-black text-white' : 'bg-vintage-creamDark text-vintage-black border border-vintage-border';
-            
-            toast.className = `flex items-center gap-2 px-4 py-3 rounded-sm shadow-md text-xs font-sans uppercase tracking-wider transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto ${bgClass}`;
-            toast.innerHTML = `
-                <i class="fas ${type === 'success' ? 'fa-check-circle text-vintage-accent' : 'fa-info-circle text-vintage-gray'}"></i>
-                <span>${message}</span>
-            `;
-            
-            container.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.remove('translate-y-2', 'opacity-0');
-            }, 10);
-            
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => {
-                    container.removeChild(toast);
-                }, 300);
-            }, 3500);
         }
 
         window.switchTab = function(tabId) {
             document.getElementById('view-feed').classList.toggle('hidden', tabId !== 'feed');
             document.getElementById('view-article-detail').classList.toggle('hidden', tabId !== 'detail');
-            document.getElementById('view-admin').classList.toggle('hidden', tabId !== 'admin');
-            
-            const navFeed = document.getElementById('nav-feed');
-            const navAdmin = document.getElementById('nav-admin');
-            
-            if (tabId === 'feed') {
-                navFeed.className = "text-vintage-black border-b border-vintage-black pb-1 transition duration-200";
-                navAdmin.className = "text-vintage-gray hover:text-vintage-black pb-1 transition duration-200 flex items-center gap-1.5";
-                document.getElementById('hero-section').classList.remove('hidden');
-            } else if (tabId === 'admin') {
-                navFeed.className = "text-vintage-gray hover:text-vintage-black pb-1 transition duration-200";
-                navAdmin.className = "text-vintage-black border-b border-vintage-black pb-1 transition duration-200 flex items-center gap-1.5";
-                document.getElementById('hero-section').classList.add('hidden');
-            } else {
-                document.getElementById('hero-section').classList.add('hidden');
-            }
-            
+            document.getElementById('hero-section').classList.toggle('hidden', tabId === 'detail');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
