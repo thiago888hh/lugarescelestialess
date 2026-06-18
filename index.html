@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lugares Celestiales - Archivo Teológico</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -47,119 +52,187 @@
 <body class="font-sans min-h-screen flex flex-col relative select-none">
     <div class="noise-overlay"></div>
 
+    <!-- Navegación -->
     <nav class="bg-vintage-bg/95 border-b border-vintage-border sticky top-0 z-40 w-full backdrop-blur-md">
         <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="switchTab('feed')">
                 LUGARES<br><span class="text-vintage-accent">CELESTIALES.</span>
             </div>
             <div class="flex flex-wrap justify-center items-center gap-6 font-sans text-xs uppercase tracking-widest font-semibold">
-                <button onclick="switchTab('feed')" class="text-vintage-black border-b border-vintage-black pb-1 transition duration-200">Inicio</button>
+                <button onclick="switchTab('feed')" id="nav-feed" class="text-vintage-black border-b border-vintage-black pb-1 transition duration-200">
+                    Inicio
+                </button>
+                <div class="flex items-center gap-3 border-l border-vintage-border pl-6">
+                    <a href="https://www.instagram.com/lugarescelestiales.official" target="_blank" class="text-vintage-gray hover:text-pink-600 transition text-sm">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC2amcHiKLx6COp5WUcZ17Pw" target="_blank" class="text-vintage-gray hover:text-red-600 transition text-sm">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
+    <!-- Sección Hero -->
     <div id="hero-section" class="relative h-[48vh] w-full hero-bg flex flex-col transition-all duration-500">
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-20 flex-grow flex items-center justify-center px-4 text-center pb-8">
             <div class="max-w-3xl">
-                <h1 class="font-serif text-white text-3xl md:text-5xl lg:text-6xl leading-tight font-medium drop-shadow-md">La teología es la base de una iglesia sana.</h1>
+                <h1 class="font-serif text-white text-3xl md:text-5xl lg:text-6xl leading-tight font-medium drop-shadow-md">
+                    La teología es la base de una iglesia sana.
+                </h1>
                 <div class="w-16 h-[1px] bg-vintage-accent mx-auto mt-6"></div>
             </div>
         </div>
     </div>
 
+    <!-- Contenedor Principal -->
     <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">
+        
+        <!-- Vista Feed / Lista de Artículos -->
         <div id="view-feed" class="block space-y-8 fade-in">
             <div class="text-center">
                 <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Enseñanza y materiales</h2>
+                <div class="w-8 h-[1px] bg-vintage-gray mx-auto mt-3 mb-4"></div>
             </div>
-            <div id="articles-container" class="flex flex-col"></div>
+            
+            <!-- Barra de Búsqueda -->
+            <div class="max-w-md mx-auto relative mb-8">
+                <input type="text" id="search-input" oninput="filterArticles()" placeholder="Buscar por artículo, autor o tema..." class="w-full bg-vintage-creamDark/60 border border-vintage-border rounded-full py-2.5 pl-10 pr-4 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent focus:border-vintage-accent transition-all">
+                <div class="absolute left-3.5 top-3 text-vintage-gray">
+                    <i class="fas fa-search text-xs"></i>
+                </div>
+            </div>
+            
+            <!-- Listado Dinámico -->
+            <div id="articles-container" class="flex flex-col">
+                <div class="py-12 text-center">
+                    <span class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-vintage-black"></span>
+                    <p class="font-serif italic text-vintage-gray text-sm mt-3">Sincronizando archivo...</p>
+                </div>
+            </div>
         </div>
 
+        <!-- Vista Detalle de Artículo -->
         <div id="view-article-detail" class="hidden fade-in">
-            <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider mb-8 transition">&larr; Volver</button>
-            <article class="bg-vintage-bg border border-vintage-border p-6 md:p-12 shadow-sm rounded-sm">
+            <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider mb-8 transition">
+                &larr; Volver
+            </button>
+            <article class="bg-vintage-bg border border-vintage-border p-6 md:p-12 shadow-sm rounded-sm relative">
                 <header class="text-center border-b border-vintage-border pb-8 mb-8">
                     <span id="detail-reference" class="font-sans text-xs uppercase tracking-[0.2em] text-vintage-accent block mb-3"></span>
-                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium mb-4"></h1>
-                    <div class="font-serif italic text-vintage-gray text-base md:text-lg">Escrito por <span id="detail-author" class="font-medium text-vintage-black"></span></div>
+                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium leading-tight mb-4"></h1>
+                    <div class="font-serif italic text-vintage-gray text-base md:text-lg">
+                        Escrito por <span id="detail-author" class="font-medium text-vintage-black"></span>
+                    </div>
                 </header>
-                <div class="flex flex-col items-center mb-8">
-                    <img id="detail-image" src="" alt="Artículo" class="w-full max-w-2xl h-64 md:h-96 object-cover grayscale opacity-95">
+                
+                <!-- Contenido de Lectura -->
+                <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line">
                 </div>
-                <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line"></div>
             </article>
         </div>
     </main>
 
+    <!-- Pie de Página -->
+    <footer class="bg-vintage-bg border-t border-vintage-border mt-auto py-8">
+        <div class="max-w-3xl mx-auto px-4 text-center text-vintage-gray font-sans text-[10px] uppercase tracking-widest">
+            &copy; <span id="current-year"></span> Lugares Celestiales.<br>
+            <span class="font-serif italic text-[11px] opacity-70">L.C.</span>
+        </div>
+    </footer>
+
+    <!-- Lógica de la Aplicación -->
     <script type="module">
         const seedArticles = [
-            { 
-                title: "Cuarto de Oración", 
-                author: "LUGARES CELESTIALES | THIAGO FRANZA", 
-                reference: "Hechos 2:42", 
-                content: "El cuarto de oración no es solo un lugar físico sino un lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración.", 
-                imageUrl: "https://images.unsplash.com/photo-1507434967838-89c564344e6b?w=800" 
+            {
+                title: "Cuarto de Oración",
+                author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Hechos 2:42",
+                content: "El cuarto de oración no solo es una habitación física sino el lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración (Hechos 2:42). La iglesia primitiva vivía con una teología sana, pero también con la parte práctica de las oraciones y partir el pan juntos."
             },
-            { 
-                title: "Cristología", 
-                author: "LUGARES CELESTIALES | THIAGO FRANZA", 
-                reference: "Hebreos 1:1-2", 
-                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <strong>siempre fue un asunto teológico e histórico</strong>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong>¡CUÁN IMPORTANTE ES LA CRISTOLOGÍA EN LOS CONTEXTOS ECLESIALES Y ÉTNICOS!</strong> La cristología lo es todo, es la base del evangelio, es su clímax y su desenlace; la cristología es el evangelio (Hebreos 1:1-2).\n\n“En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo”. \n— <strong>Carlos Smarra</strong>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18).", 
-                imageUrl: "https://images.unsplash.com/photo-1490300472337-775338341101?w=800" 
+            {
+                title: "Cristología",
+                author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Hebreos 1:1-2",
+                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)."
             },
-            { 
-                title: "La Iglesia", 
-                author: "LUGARES CELESTIALES | THIAGO FRANZA", 
-                reference: "Mateo 16:18", 
-                content: "La iglesia no es un edificio, es un pueblo llamado a vivir bajo el señorío de Cristo. Es la columna y baluarte de la verdad en un mundo lleno de confusión. Somos piedras vivas siendo edificadas para ser una morada de Dios en el Espíritu.", 
-                imageUrl: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=800" 
+            {
+                title: "Israel",
+                author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Romanos 11:1-2",
+                content: "Israel es un asunto bíblico e histórico, el antisemitismo es el gran enemigo pero ¿qué debe hacer la iglesia ante esta situación? <strong class='text-vintage-accent tracking-wider underline underline-offset-4 pl-1 font-semibold'>RESPONDER</strong>.\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"Señor Jesucristo, me ofrezco para <span class='bg-vintage-accent/10 px-1 font-medium not-italic rounded-sm'>ayudar a tu pueblo</span> de cualquier manera posible. En cualquier lugar. En cualquier momento.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Corrie Ten Boom</cite></blockquote>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>La cristología temprana del A.T. nace en una identidad judía</span> y su desarrollo nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada."
             },
-            { 
-                title: "Israel", 
-                author: "LUGARES CELESTIALES | THIAGO FRANZA", 
-                reference: "Romanos 11:1-2", 
-                content: "Israel es un asunto bíblico e histórico. El antisemitismo es el gran enemigo, pero ¿qué debe hacer la iglesia ante esta situación? <strong>RESPONDER:</strong>\n\n“Señor Jesucristo, me ofrezco para ayudar a tu pueblo de cualquier manera posible. En cualquier lugar. En cualquier momento”. \n— <strong>Corrie ten Boom</strong>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <strong>La cristología temprana del A.T. nace en una identidad judía</strong> y su desarrollo nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada.", 
-                imageUrl: "https://images.unsplash.com/photo-1587396014441-11d23467645f?w=800" 
+            {
+                title: "Recursos para tu Iglesia",
+                author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Efesios 4:13-14",
+                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, pero también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y en muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras."
             }
         ];
 
-        window.onload = () => renderArticles(seedArticles);
+        window.onload = function() {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            renderArticles(seedArticles);
+        };
 
         function renderArticles(list) {
             const container = document.getElementById('articles-container');
             container.innerHTML = '';
+            
+            if(list.length === 0) {
+                container.innerHTML = `<p class="font-serif italic text-vintage-gray text-center py-8">No se encontraron artículos.</p>`;
+                return;
+            }
+
             list.forEach(article => {
                 const item = document.createElement('div');
-                item.className = "py-6 group cursor-pointer hover:bg-vintage-creamDark/45 transition border-b border-vintage-border px-3";
-                item.onclick = () => showDetail(article);
+                item.className = `flex items-center justify-between py-5 group cursor-pointer hover:bg-vintage-creamDark/45 transition duration-300 px-4 -mx-4 border-b border-vintage-border`;
+                
+                item.addEventListener('click', () => showDetail(article));
+                
                 item.innerHTML = `
-                    <div class="flex items-center gap-6">
-                        <img src="${article.imageUrl}" class="w-16 h-16 object-cover grayscale group-hover:grayscale-0 transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-2 h-2 rounded-full bg-vintage-accent opacity-0 group-hover:opacity-100 transition duration-300"></div>
                         <div>
-                            <span class="text-[9px] uppercase tracking-widest text-vintage-accent font-semibold block">${article.author}</span>
-                            <h3 class="font-serif text-lg text-vintage-black font-semibold">${article.title}</h3>
+                            <span class="font-sans text-[9px] uppercase tracking-widest text-vintage-accent font-semibold block">${article.author}</span>
+                            <h3 class="font-serif text-lg text-vintage-black font-medium group-hover:text-vintage-accent transition duration-200 mt-0.5">${article.title}</h3>
                         </div>
-                    </div>`;
+                    </div>
+                    <div class="text-vintage-gray/50 group-hover:text-vintage-black transition duration-300 text-sm font-serif italic">
+                        ${article.reference || ''} &rarr;
+                    </div>
+                `;
                 container.appendChild(item);
             });
         }
 
-        function showDetail(article) {
+        window.filterArticles = function() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const filtered = seedArticles.filter(a => 
+                a.title.toLowerCase().includes(query) || 
+                a.content.toLowerCase().includes(query) || 
+                a.author.toLowerCase().includes(query)
+            );
+            renderArticles(filtered);
+        };
+
+        window.showDetail = function(article) {
             document.getElementById('detail-title').textContent = article.title;
             document.getElementById('detail-author').textContent = article.author;
-            document.getElementById('detail-reference').textContent = article.reference;
+            document.getElementById('detail-reference').textContent = article.reference || "";
             document.getElementById('detail-content').innerHTML = article.content;
-            document.getElementById('detail-image').src = article.imageUrl;
+            
             switchTab('detail');
-        }
+        };
 
-        window.switchTab = (tabId) => {
+        window.switchTab = function(tabId) {
             document.getElementById('view-feed').classList.toggle('hidden', tabId !== 'feed');
             document.getElementById('view-article-detail').classList.toggle('hidden', tabId !== 'detail');
             document.getElementById('hero-section').classList.toggle('hidden', tabId === 'detail');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        };
     </script>
 </body>
 </html>
