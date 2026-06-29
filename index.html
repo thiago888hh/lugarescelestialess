@@ -140,7 +140,7 @@
                     <dl class="space-y-3 font-sans text-sm">
                         <div class="pb-2 border-b border-vintage-border/40">
                             <dt class="font-bold text-vintage-black inline-block min-w-[140px] uppercase tracking-wide text-xs">Teología:</dt>
-                            <dd class="text-vintage-gray inline font-serif italic text-base">La lógica de Dios, es la referenceia a las escrituras.</dd>
+                            <dd class="text-vintage-gray inline font-serif italic text-base">La lógica de Dios, es la referencia a las escrituras.</dd>
                         </div>
                         <div class="pb-2 border-b border-vintage-border/40">
                             <dt class="font-bold text-vintage-black inline-block min-w-[140px] uppercase tracking-wide text-xs">Cristología:</dt>
@@ -174,8 +174,8 @@
 
     <!-- Lógica de la Aplicación -->
     <script type="module">
-        // Caja de descarga CON el aviso de aclaración de palabras
-        const boxConAclaracion = `
+        // Caja de descarga CON el aviso de aclaración de palabras (Solo para Cristología y Recursos)
+        const downloadBoxHtml = `
             <div class="mt-12 pt-8 border-t border-vintage-border">
                 <div class="bg-vintage-accentLight border border-vintage-border rounded-sm p-5 md:p-6 flex flex-col sm:flex-row items-center gap-5 max-w-xl mx-auto shadow-sm">
                     <div class="relative w-20 h-26 bg-white border border-vintage-border shadow-sm flex flex-col justify-between p-2 rounded-sm shrink-0 select-none">
@@ -195,55 +195,34 @@
             </div>
         `;
 
-        // Caja de descarga SIN el aviso de aclaración de palabras
-        const boxSinAclaracion = `
-            <div class="mt-12 pt-8 border-t border-vintage-border">
-                <div class="bg-vintage-accentLight border border-vintage-border rounded-sm p-5 md:p-6 flex flex-col sm:flex-row items-center gap-5 max-w-xl mx-auto shadow-sm">
-                    <div class="relative w-20 h-26 bg-white border border-vintage-border shadow-sm flex flex-col justify-between p-2 rounded-sm shrink-0 select-none">
-                        <div class="text-[9px] font-sans font-bold tracking-wider text-vintage-accent uppercase leading-tight border-b border-vintage-border pb-1">L.C.</div>
-                        <div class="text-center text-vintage-accent/80 my-2"><i class="fas fa-file-pdf text-3xl"></i></div>
-                        <div class="bg-vintage-accent text-white text-[7px] font-sans font-bold uppercase tracking-widest py-0.5 text-center rounded-sm">TEOLOGÍA</div>
-                    </div>
-                    <div class="text-center sm:text-left flex-grow">
-                        <span class="font-sans text-[10px] uppercase tracking-widest font-bold text-vintage-accent block mb-1">Material Descargable</span>
-                        <h4 class="font-serif text-base text-vintage-black font-semibold leading-snug mb-1">La Identidad de la Iglesia Primitiva y su Ortodoxia</h4>
-                        <p class="font-serif italic text-xs text-vintage-gray mb-3">Formato PDF preparado para uso en discipulado local.</p>
-                        <a href="La_Identidad_de_la_Iglesia_Primitiva.pdf" download class="inline-flex items-center gap-2 bg-vintage-accent hover:bg-vintage-accent/90 text-white font-sans text-[10px] uppercase tracking-widest font-bold py-2 px-4 rounded-full transition duration-200 shadow-sm">
-                            <i class="fas fa-cloud-download-alt"></i> Descargar PDF
-                        </a>
-                    </div>
-                </div>
-            </div>
-        `;
-
         const seedArticles = [
             {
                 title: "Cuarto de Oración",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Hechos 2:42",
                 showGlossary: false,
-                content: "El cuarto de oración no solo es una habitación física sino el lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración (Hechos 2:42). La iglesia primitiva vivía con una teología sana, pero también con la parte práctica de las oraciones y partir el pan juntos." + boxSinAclaracion
+                content: "El cuarto de oración no solo es una habitación física sino el lugar y momento donde vemos en comunidad la belleza de Jesucristo. La vida en comunidad comienza en un cuarto de oración (Hechos 2:42). La iglesia primitiva vivía con una teología sana, pero también con la parte práctica de las oraciones y partir el pan juntos."
             },
             {
                 title: "Cristología",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Hebreos 1:1-2",
                 showGlossary: true,
-                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)." + boxConAclaracion
+                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)." + downloadBoxHtml
             },
             {
                 title: "Israel",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Romanos 11:1-2",
                 showGlossary: false,
-                content: "Israel es un asunto bíblico e histórico, el antisemitismo es el gran enemigo pero ¿qué debe hacer la iglesia ante esta situación? <strong class='text-vintage-accent tracking-wider underline underline-offset-4 pl-1 font-semibold'>RESPONDER</strong>.\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"Señor Jesucristo, me ofrezco para <span class='bg-vintage-accent/10 px-1 font-medium not-italic rounded-sm'>ayudar a tu pueblo</span> de cualquier manera posible. En cualquier lugar. En cualquier momento.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Corrie Ten Boom</cite></blockquote>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>La cristología temprana del A.T. nace en una identidad judía</span> y su desarrollo nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada." + boxSinAclaracion
+                content: "Israel es un asunto bíblico e histórico, el antisemitismo es el gran enemigo pero ¿qué debe hacer la iglesia ante esta situación? <strong class='text-vintage-accent tracking-wider underline underline-offset-4 pl-1 font-semibold'>RESPONDER</strong>.\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"Señor Jesucristo, me ofrezco para <span class='bg-vintage-accent/10 px-1 font-medium not-italic rounded-sm'>ayudar a tu pueblo</span> de cualquier manera posible. En cualquier lugar. En cualquier momento.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Corrie Ten Boom</cite></blockquote>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>La cristología temprana del A.T. nace en una identidad judía</span> y su desarrollo nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada."
             },
             {
                 title: "Recursos para tu Iglesia",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Efesios 4:13-14",
                 showGlossary: true,
-                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, pero también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y en muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras." + boxConAclaracion
+                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, pero también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y en muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras." + downloadBoxHtml
             }
         ];
 
@@ -299,7 +278,7 @@
             document.getElementById('detail-reference').textContent = article.reference || "";
             document.getElementById('detail-content').innerHTML = article.content;
             
-            // Mostrar u ocultar las aclaraciones de palabras según la propiedad 'showGlossary'
+            // Mostrar u ocultar el bloque estático de las aclaraciones según corresponda
             const glossaryBlock = document.getElementById('detail-glossary');
             if (article.showGlossary) {
                 glossaryBlock.classList.remove('hidden');
