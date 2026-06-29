@@ -1,157 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lugares Celestiales - Archivo Teológico</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        vintage: {
-                            bg: '#FAF9F6',
-                            black: '#1A1A1A',
-                            gray: '#6B6A67',
-                            border: '#E8E6E0',
-                            creamDark: '#F2F0EB',
-                            accent: '#8C7547',
-                            accentLight: '#FAF6EE'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body { background-color: #FAF9F6; color: #1A1A1A; -webkit-font-smoothing: antialiased; }
-        .noise-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0.04; z-index: 10; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
-        .hero-bg { background-image: url('https://images.unsplash.com/photo-1495446815901-a7297e633e8d?q=80&w=2070&auto=format&fit=crop'); background-size: cover; background-position: center; }
-        .hero-overlay { background: linear-gradient(to bottom, rgba(26,26,26,0.3) 0%, rgba(26,26,26,0.85) 100%); }
-        .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
-</head>
-<body class="font-sans min-h-screen flex flex-col relative select-none">
-    <div class="noise-overlay"></div>
-
-    <!-- Navegación -->
-    <nav class="bg-vintage-bg/95 border-b border-vintage-border sticky top-0 z-40 w-full backdrop-blur-md">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="switchTab('feed')">
-                LUGARES<br><span class="text-vintage-accent">CELESTIALES.</span>
-            </div>
-            <div class="flex flex-wrap justify-center items-center gap-6 font-sans text-xs uppercase tracking-widest font-semibold">
-                <button onclick="switchTab('feed')" id="nav-feed" class="text-vintage-black border-b border-vintage-black pb-1 transition duration-200">
-                    Inicio
-                </button>
-                <div class="flex items-center gap-3 border-l border-vintage-border pl-6">
-                    <a href="https://www.instagram.com/lugarescelestiales.official" target="_blank" class="text-vintage-gray hover:text-pink-600 transition text-sm">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UC2amcHiKLx6COp5WUcZ17Pw" target="_blank" class="text-vintage-gray hover:text-red-600 transition text-sm">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Sección Hero -->
-    <div id="hero-section" class="relative h-[48vh] w-full hero-bg flex flex-col transition-all duration-500">
-        <div class="absolute inset-0 hero-overlay"></div>
-        <div class="relative z-20 flex-grow flex items-center justify-center px-4 text-center pb-8">
-            <div class="max-w-3xl">
-                <h1 class="font-serif text-white text-3xl md:text-5xl lg:text-6xl leading-tight font-medium drop-shadow-md">
-                    La teología es la base de una iglesia sana.
-                </h1>
-                <div class="w-16 h-[1px] bg-vintage-accent mx-auto mt-6"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contenedor Principal -->
-    <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">
-        
-        <!-- Vista Feed / Lista de Artículos -->
-        <div id="view-feed" class="block space-y-8 fade-in">
-            <div class="text-center">
-                <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Enseñanza y materiales</h2>
-                <div class="w-8 h-[1px] bg-vintage-gray mx-auto mt-3 mb-4"></div>
-            </div>
-            
-            <!-- Barra de Búsqueda -->
-            <div class="max-w-md mx-auto relative mb-8">
-                <input type="text" id="search-input" oninput="filterArticles()" placeholder="Buscar por artículo, autor o tema..." class="w-full bg-vintage-creamDark/60 border border-vintage-border rounded-full py-2.5 pl-10 pr-4 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent focus:border-vintage-accent transition-all">
-                <div class="absolute left-3.5 top-3 text-vintage-gray">
-                    <i class="fas fa-search text-xs"></i>
-                </div>
-            </div>
-            
-            <!-- Listado Dinámico -->
-            <div id="articles-container" class="flex flex-col">
-                <div class="py-12 text-center">
-                    <span class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-vintage-black"></span>
-                    <p class="font-serif italic text-vintage-gray text-sm mt-3">Sincronizando archivo...</p>
-                </div>
-            </div>
-
-            <!-- Mensaje de Próximo Material -->
-            <div class="pt-8 text-center border-t border-dashed border-vintage-border">
-                <p class="font-serif italic text-vintage-gray text-base tracking-wide">
-                    Subiremos material para fines de discipulado próximamente
-                </p>
-                <div class="w-4 h-[1px] bg-vintage-accent/50 mx-auto mt-3"></div>
-            </div>
-        </div>
-
-        <!-- Vista Detalle de Artículo -->
-        <div id="view-article-detail" class="hidden fade-in">
-            <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider mb-8 transition">
-                &larr; Volver
-            </button>
-            <article class="bg-vintage-bg border border-vintage-border p-6 md:p-12 shadow-sm rounded-sm relative">
-                <header class="text-center border-b border-vintage-border pb-8 mb-8">
-                    <span id="detail-reference" class="font-sans text-xs uppercase tracking-[0.2em] text-vintage-accent block mb-3"></span>
-                    <h1 id="detail-title" class="font-serif text-3xl md:text-5xl text-vintage-black font-medium leading-tight mb-4"></h1>
-                    <div class="font-serif italic text-vintage-gray text-base md:text-lg">
-                        Escrito por <span id="detail-author" class="font-medium text-vintage-black"></span>
-                    </div>
-                </header>
-                
-                <!-- Contenido de Lectura -->
-                <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line">
-                </div>
-            </article>
-        </div>
-    </main>
-
-    <!-- Pie de Página -->
-    <footer class="bg-vintage-bg border-t border-vintage-border mt-auto py-8">
-        <div class="max-w-3xl mx-auto px-4 text-center text-vintage-gray font-sans text-[10px] uppercase tracking-widest">
-            &copy; <span id="current-year"></span> Lugares Celestiales.<br>
-            <span class="font-serif italic text-[11px] opacity-70">L.C.</span>
-        </div>
-    </footer>
-
-    <!-- Lógica de la Aplicación -->
+<!-- Lógica de la Aplicación -->
     <script type="module">
         const seedArticles = [
             {
@@ -164,7 +11,15 @@
                 title: "Cristología",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Hebreos 1:1-2",
-                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)."
+                content: "La cristología es un asunto que el Padre quiere revelarnos en estos days, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)."
+            },
+            {
+                title: "La Identidad de la Iglesia Primitiva y su Ortodoxia",
+                author: "LUGARES CELESTIALES | THIAGO FRANZA",
+                reference: "Lucas 24:25-27",
+                // Guardamos el nombre del archivo PDF generado aquí para el botón de descarga
+                pdfUrl: "La_Identidad_de_la_Iglesia_Primitiva.pdf", 
+                content: "La cristología temprana fue la identidad de la iglesia primitiva, la base de la iglesia primitiva estaba fundamentada en una identidad teológica e histórica (Hch 2) el pentecostés fue la marca de identidad de una iglesia que recién estaba \"naciendo\".\n\n¡¡El desarrollo de la iglesia es tan glorioso!! Recorrer las bases y el desarrollo de la iglesia como material de discipulado es algo que genera vidas de devoción teológica.\n\n<strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>LO QUE ENSEÑAMOS ES LA IDENTIDAD DE LA IGLESIA:</strong> La ortodoxia de Cristo es un asunto de identidad teológica, lo que nos fue enseñado no solo debe ser una fuente de información sino también de restauración. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>No encontrar belleza en lo que enseñamos y se nos fue enseñado es por falta de identidad</span>, enseñar la misma narrativa todos los días les dejó claro algo a los discípulos: <em>\"esta es la creencia que debemos seguir hasta el fin de nuestros días, incluso morir por ella\"</em>.\n\nEl martirio bíblico e histórico siempre fue por un tema de ortodoxia (algo enseñado), nuestras creencias siempre han desafiado a este sistema corrompido y ahí entendemos <strong class='uppercase tracking-wider text-vintage-black block my-2 font-bold'>CUAN NECESARIO ES MIEMBROS CON EL CONOCIMIENTO DE NUESTRA ORTODOXIA</strong> (Lc 24:25-27).\n\nCuando los miembros de nuestra iglesia local tienen una necesidad de información y encuentro es necesario una experiencia de concilio donde la enseñanza central sea Cristo, y una de las cosas más deslumbrantes de la cristología es que puede ser enseñada a cualquiera, en este contexto eclesial <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>debemos darle valor a enseñar</span>.\n\nLa pregunta es: ¿qué es lo que provoca lo que enseñas en los corazones? Porque el tema que enseñen determina su impacto, y cuando vamos a las escrituras y vemos a los apóstoles enseñando cristología como el clímax de enseñanza nos damos cuenta su <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>impacto social y cultural</span>. ¿Cuáles fueron?\n\n<ul class='list-none pl-2 space-y-1.5 my-4 font-sans text-base text-vintage-black font-semibold'>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>1. La plantación de iglesias.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>2. Comunidades integrales ancladas al evangelio.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>3. Identidad eclesial.</span></li>\n</ul>"
             },
             {
                 title: "Israel",
@@ -210,7 +65,7 @@
                     </div>
                     <div class="text-vintage-gray/50 group-hover:text-vintage-black transition duration-300 text-sm font-serif italic">
                         ${article.reference || ''} &rarr;
-                    </div>
+              0     </div>
                 `;
                 container.appendChild(item);
             });
@@ -223,7 +78,7 @@
                 a.content.toLowerCase().includes(query) || 
                 a.author.toLowerCase().includes(query)
             );
-            renderArticles(filtered);
+           renderArticles(filtered);
         };
 
         window.showDetail = function(article) {
@@ -231,6 +86,17 @@
             document.getElementById('detail-author').textContent = article.author;
             document.getElementById('detail-reference').textContent = article.reference || "";
             document.getElementById('detail-content').innerHTML = article.content;
+            
+            // Manejo dinámico del botón de descarga
+            const downloadBtn = document.getElementById('detail-download-btn');
+            if (article.pdfUrl) {
+                downloadBtn.href = article.pdfUrl;
+                downloadBtn.classList.remove('hidden');
+                downloadBtn.classList.add('flex');
+            } else {
+                downloadBtn.classList.add('hidden');
+                downloadBtn.classList.remove('flex');
+            }
             
             switchTab('detail');
         };
@@ -242,5 +108,4 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
     </script>
-</body>
-</html>
+    
