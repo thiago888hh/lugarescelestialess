@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lugares Celestiales - Archivo Teológico</title>
     
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <script>
@@ -49,6 +52,7 @@
 <body class="font-sans min-h-screen flex flex-col relative select-none">
     <div class="noise-overlay"></div>
 
+    <!-- Navegación -->
     <nav class="bg-vintage-bg/95 border-b border-vintage-border sticky top-0 z-40 w-full backdrop-blur-md">
         <div class="max-w-5xl mx-auto px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="font-serif text-xl md:text-2xl leading-none uppercase tracking-widest cursor-pointer text-vintage-black hover:opacity-80 transition text-center md:text-left" onclick="switchTab('feed')">
@@ -70,6 +74,7 @@
         </div>
     </nav>
 
+    <!-- Sección Hero -->
     <div id="hero-section" class="relative h-[48vh] w-full hero-bg flex flex-col transition-all duration-500">
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="relative z-20 flex-grow flex items-center justify-center px-4 text-center pb-8">
@@ -82,14 +87,17 @@
         </div>
     </div>
 
+    <!-- Contenedor Principal -->
     <main class="flex-grow w-full max-w-4xl mx-auto px-4 sm:px-6 py-10">
         
+        <!-- Vista Feed / Lista de Artículos -->
         <div id="view-feed" class="block space-y-8 fade-in">
             <div class="text-center">
                 <h2 class="font-serif text-2xl md:text-3xl text-vintage-black">Enseñanza y materiales</h2>
                 <div class="w-8 h-[1px] bg-vintage-gray mx-auto mt-3 mb-4"></div>
             </div>
             
+            <!-- Barra de Búsqueda -->
             <div class="max-w-md mx-auto relative mb-8">
                 <input type="text" id="search-input" oninput="filterArticles()" placeholder="Buscar por artículo, autor o tema..." class="w-full bg-vintage-creamDark/60 border border-vintage-border rounded-full py-2.5 pl-10 pr-4 font-serif text-sm focus:outline-none focus:ring-1 focus:ring-vintage-accent focus:border-vintage-accent transition-all">
                 <div class="absolute left-3.5 top-3 text-vintage-gray">
@@ -97,6 +105,7 @@
                 </div>
             </div>
             
+            <!-- Listado Dinámico -->
             <div id="articles-container" class="flex flex-col">
                 <div class="py-12 text-center">
                     <span class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-vintage-black"></span>
@@ -105,11 +114,13 @@
             </div>
         </div>
 
+        <!-- Vista Detalle de Artículo -->
         <div id="view-article-detail" class="hidden fade-in">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
                 <button onclick="switchTab('feed')" class="flex items-center gap-2 text-vintage-gray hover:text-vintage-black font-sans text-xs uppercase tracking-wider transition">
                     &larr; Volver
                 </button>
+                <!-- Botón de Descarga que aparecerá si el artículo contiene material PDF -->
                 <a id="detail-download-btn" href="#" download class="hidden items-center gap-2 bg-vintage-accent hover:bg-vintage-accent/90 text-white font-sans text-[11px] uppercase tracking-widest font-semibold py-2.5 px-5 rounded-full shadow-sm transition duration-200">
                     <i class="fas fa-file-pdf"></i> Descargar Material (PDF)
                 </a>
@@ -123,12 +134,14 @@
                     </div>
                 </header>
                 
+                <!-- Contenido de Lectura -->
                 <div id="detail-content" class="font-serif text-lg md:text-xl text-vintage-black leading-relaxed space-y-6 max-w-2xl mx-auto whitespace-pre-line">
                 </div>
             </article>
         </div>
     </main>
 
+    <!-- Pie de Página -->
     <footer class="bg-vintage-bg border-t border-vintage-border mt-auto py-8">
         <div class="max-w-3xl mx-auto px-4 text-center text-vintage-gray font-sans text-[10px] uppercase tracking-widest">
             &copy; <span id="current-year"></span> Lugares Celestiales.<br>
@@ -136,7 +149,11 @@
         </div>
     </footer>
 
+    <!-- Lógica de la Aplicación -->
     <script type="module">
+        // Texto integrado que comparten los dos artículos seleccionados
+        const compartidoIdentidadTeologica = "\n\n<hr class='border-vintage-border my-8'>\n\n<span class='font-sans text-xs uppercase tracking-[0.2em] text-vintage-accent block mb-2'>Material de Discipulado Adjunto</span>\n<h3 class='font-serif text-xl md:text-2xl text-vintage-black font-semibold mb-4'>La Identidad de la Iglesia Primitiva y su Ortodoxia</h3>La cristología temprana fue la identidad de la iglesia primitiva, la base de la iglesia primitiva estaba fundamentada en una identidad teológica e histórica (Hch 2) el pentecostés fue la marca de identidad de una iglesia que recién estaba \"naciendo\".\n\n¡¡El desarrollo de la iglesia es tan glorioso!! Recorrer las bases y el desarrollo de la iglesia como material de discipulado es algo que genera vidas de devoción teológica.\n\n<strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>LO QUE ENSEÑAMOS ES LA IDENTIDAD DE LA IGLESIA:</strong> La ortodoxia de Cristo es un asunto de identidad teológica, lo que nos fue enseñado no solo debe ser una fuente de información sino también de restauración. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>No encontrar belleza en lo que enseñamos y se nos fue enseñado es por falta de identidad</span>, enseñar la misma narrativa todos los días les dejó claro algo a los discípulos: <em>\"esta es la creencia que debemos seguir hasta el fin de nuestros días, incluso morir por ella\"</em>.\n\nEl martirio bíblico e histórico siempre fue por un tema de ortodoxia (algo enseñado), nuestras creencias siempre han desafiado a este sistema corrompido y ahí entendemos <strong class='uppercase tracking-wider text-vintage-black block my-2 font-bold'>CUAN NECESARIO ES MIEMBROS CON EL CONOCIMIENTO DE NUESTRA ORTODOXIA</strong> (Lc 24:25-27).\n\nCuando los miembros de nuestra iglesia local tienen una necesidad de información y encuentro es necesario una experiencia de concilio donde la enseñanza central sea Cristo, y una de las cosas más deslumbrantes de la cristología es que puede ser enseñada a cualquiera, en este contexto eclesial <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>debemos darle valor a enseñar</span>.\n\nLa pregunta es: ¿qué es lo que provoca lo que enseñas en los corazones? Porque el tema que enseñen determina su impacto, y cuando vamos a las escrituras y vemos a los apóstoles enseñando cristología como el clímax de enseñanza nos damos cuenta su <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>impacto social y cultural</span>. ¿Cuáles fueron?\n\n<ul class='list-none pl-2 space-y-1.5 my-4 font-sans text-base text-vintage-black font-semibold'>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>1. La plantación de iglesias.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>2. Comunidades integrales ancladas al evangelio.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>3. Identidad eclesial.</span></li>\n</ul>";
+
         const seedArticles = [
             {
                 title: "Cuarto de Oración",
@@ -148,26 +165,21 @@
                 title: "Cristología",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Hebreos 1:1-2",
-                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)."
-            },
-            {
-                title: "La Identidad de la Iglesia Primitiva y su Ortodoxia",
-                author: "LUGARES CELESTIALES | THIAGO FRANZA",
-                reference: "Lucas 24:25-27",
-                pdfUrl: "La_Identidad_de_la_Iglesia_Primitiva.pdf", // Enlace al PDF descargable
-                content: "La cristología temprana fue la identidad de la iglesia primitiva, la base de la iglesia primitiva estaba fundamentada en una identidad teológica e histórica (Hch 2) el pentecostés fue la marca de identidad de una iglesia que recién estaba \"naciendo\".\n\n¡¡El desarrollo de la iglesia es tan glorioso!! Recorrer las bases y el desarrollo de la iglesia como material de discipulado es algo que genera vidas de devoción teológica.\n\n<strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>LO QUE ENSEÑAMOS ES LA IDENTIDAD DE LA IGLESIA:</strong> La ortodoxia de Cristo es un asunto de identidad teológica, lo que nos fue enseñado no solo debe ser una fuente de información sino también de restauración. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>No encontrar belleza en lo que enseñamos y se nos fue enseñado es por falta de identidad</span>, enseñar la misma narrativa todos los días les dejó claro algo a los discípulos: <em>\"esta es la creencia que debemos seguir hasta el fin de nuestros días, incluso morir por ella\"</em>.\n\nEl martirio bíblico e histórico siempre fue por un tema de ortodoxia (algo enseñado), nuestras creencias siempre han desafiado a este sistema corrompido y ahí entendemos <strong class='uppercase tracking-wider text-vintage-black block my-2 font-bold'>CUAN NECESARIO ES MIEMBROS CON EL CONOCIMIENTO DE NUESTRA ORTODOXIA</strong> (Lc 24:25-27).\n\nCuando los miembros de nuestra iglesia local tienen una necesidad de información y encuentro es necesario una experiencia de concilio donde la enseñanza central sea Cristo, y una de las cosas más deslumbrantes de la cristología es que puede ser enseñada a cualquiera, en este contexto eclesial <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>debemos darle valor a enseñar</span>.\n\nLa pregunta es: ¿qué es lo que provoca lo que enseñas en los corazones? Porque el tema que enseñen determina su impacto, y cuando vamos a las escrituras y vemos a los apóstoles enseñando cristología como el clímax de enseñanza nos damos cuenta su <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>impacto social y cultural</span>. ¿Cuáles fueron?\n\n<ul class='list-none pl-2 space-y-1.5 my-4 font-sans text-base text-vintage-black font-semibold'>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>1. La plantación de iglesias.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>2. Comunidades integrales ancladas al evangelio.</span></li>\n  <li><span class='bg-vintage-accent/10 px-1 rounded-sm'>3. Identidad eclesial.</span></li>\n</ul>"
+                pdfUrl: "La_Identidad_de_la_Iglesia_Primitiva.pdf", // Descarga habilitada desde aquí
+                content: "La cristología es un asunto que el Padre quiere revelarnos en estos días, aunque <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>siempre fue un asunto teológico e histórico</span>. Si la cristología no es el centro de nuestros contextos eclesiales y étnicos, estamos errados en nuestro pensamiento. <strong class='text-vintage-accent tracking-wide uppercase text-base block my-2 font-semibold'>¡Cuán importante es la cristología en los contextos eclesiales y étnicos!</strong> La cristología lo es todo: es la base del evangelio, es su clímax, su desenlace. La cristología es el evangelio (Hebreos 1:1-2).\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"En otros tiempos el Padre nos hablaba por medio de los profetas y otros medios. Pero en estos últimos días nos habla por medio de su Hijo.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Carlos Smarra</cite></blockquote>\n\nQue juntos podamos ser nutridos de esta realidad y ser edificados a medida que lo contemplamos (Efesios 4:13, 2 Corintios 3:18)." + compartidoIdentidadTeologica
             },
             {
                 title: "Israel",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Romanos 11:1-2",
-                content: "Israel es un asunto bíblico e histórico, el antisemitismo es el gran enemigo pero ¿qué debe hacer la iglesia ante esta situación? <strong class='text-vintage-accent tracking-wider underline underline-offset-4 pl-1 font-semibold'>RESPONDER</strong>.\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"Señor Jesucristo, me ofrezco para <span class='bg-vintage-accent/10 px-1 font-medium not-italic rounded-sm'>ayudar a tu pueblo</span> de cualquier manera posible. En cualquier lugar. En cualquier momento.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Corrie Ten Boom</cite></blockquote>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>La cristología temprana del A.T. nace en una identidad judía</span> y su desarrollo nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada."
+                content: "Israel es un asunto bíblico e histórico, el antisemitismo es el gran enemigo pero ¿qué debe hacer la iglesia ante esta situación? <strong class='text-vintage-accent tracking-wider underline underline-offset-4 pl-1 font-semibold'>RESPONDER</strong>.\n\n<blockquote class='border-l-2 border-vintage-accent/40 pl-4 my-6 italic text-vintage-black/80 font-serif text-xl md:text-2xl tracking-wide bg-vintage-accentLight py-3 px-4 rounded-r-sm shadow-sm'>\"Señor Jesucristo, me ofrezco para <span class='bg-vintage-accent/10 px-1 font-medium not-italic rounded-sm'>ayudar a tu pueblo</span> de cualquier manera posible. En cualquier lugar. En cualquier momento.\"\n<cite class='block text-xs uppercase tracking-widest text-vintage-gray font-sans font-semibold not-italic mt-2'>— Corrie Ten Boom</cite></blockquote>\n\nIsrael ha sido destinado como un lugar de descanso eterno para un Rey judío. <span class='bg-vintage-accent/10 px-1 font-medium rounded-sm'>La cristología temprana del A.T. nace en una identidad judía</span> y su development nos sigue mostrando lo mismo: Jesucristo es judío. La iglesia ha caído en el antisemitismo, pero eso no puede suceder en una iglesia teológicamente preparada."
             },
             {
                 title: "Recursos para tu Iglesia",
                 author: "LUGARES CELESTIALES | THIAGO FRANZA",
                 reference: "Efesios 4:13-14",
-                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, pero también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y en muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras."
+                pdfUrl: "La_Identidad_de_la_Iglesia_Primitiva.pdf", // Descarga habilitada desde aquí también
+                content: "Este espacio es para que puedas tomar cada artículo y enseñanza que pueda edificar tu casa local con fines de discipulado. Creemos en un cuerpo que se edifica mutuamente por la contemplación, pero también por la información teológica. Es clave desarrollar vidas de devoción teológica para que los miembros no sean engañados (Efesios 4:13-14). Vivimos en una era donde por internet y en muchos lugares circulan herejías y, por no haber un discipulado teológicamente correcto, muchos son engañados. Sea cual sea tu contexto eclesial, debemos ser afirmados en las Escrituras." + compartidoIdentidadTeologica
             }
         ];
 
@@ -223,7 +235,7 @@
             document.getElementById('detail-reference').textContent = article.reference || "";
             document.getElementById('detail-content').innerHTML = article.content;
             
-            // Lógica para mostrar/ocultar y vincular el botón de PDF dinámicamente
+            // Administra si se ve el botón de descarga del PDF en el detalle
             const downloadBtn = document.getElementById('detail-download-btn');
             if (article.pdfUrl) {
                 downloadBtn.href = article.pdfUrl;
